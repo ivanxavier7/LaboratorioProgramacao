@@ -5,7 +5,6 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         int avaliacao = 0;
-        int totalTrabalhadores;
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
