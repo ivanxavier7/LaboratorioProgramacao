@@ -27,11 +27,14 @@ Exercícios e trabalhos realizados no âmbito da unidade curricular "Laboratóri
 ## Implementação
 
 ### Jogo
-Variáveis:                                                                                                                   
+
+Variáveis
+
     Array 2D                                                 
     Número escolhido
-\
+
 Métodos
+
     Gerar o cartão
     Receber número
     Validar resultado da linha
@@ -42,6 +45,7 @@ Métodos
     Validação de exceções
 
 2D
+
 ```java
 int[][] arr = { { 1, 2 }, { 3, 4 } };
 for (int i = 0; i < 2; i++)
