@@ -7,6 +7,7 @@ public class App {
         int avaliacao = 0;
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
+        DesempenhoDeColaboradores teste = new DesempenhoDeColaboradores();
 
         DesempenhoDeColaboradores colaboradores = new DesempenhoDeColaboradores();
 
