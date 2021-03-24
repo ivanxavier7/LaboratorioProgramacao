@@ -41,8 +41,7 @@ Métodos
     Devolver cartão modificado
     Reiniciar Jogo
     Reiniciar com o mesmo cartão
-Validação simples
-Validação de exceções
+Validação simples e de exceções
 
 2D
 
