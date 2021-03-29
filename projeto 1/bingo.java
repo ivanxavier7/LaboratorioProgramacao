@@ -17,7 +17,7 @@ public class bingo {
         // aqui falta o marcador para se colocar no folheto
     }
     
-    
+    // sfdgg
    
 // falta fazer um mecanismo que gere 15 numeros
 // tem que gerar numero de 1 a 89, 5vezes por linha e so pode ter as dezenas repetidas no max 3 vezes
