@@ -35,9 +35,9 @@ public class Game {
   // procurar no cartao a correspondencia ao numero escolhido
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
-                if(nrEscolhido = cartao[i][j]){
+                if(nrEscolhido == cartao[i][j]){
             // trocar valor igual por 0
-                    cartao[i][j] = 0;  
+                    this.cartao[i][j] = 0;  
         }
 
     }
