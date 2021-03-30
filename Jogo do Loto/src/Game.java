@@ -45,6 +45,10 @@ public class Game {
     private int[][] generateCartao() {
         for (int i = 0; i < 3; i++) {
             int min = 1;
+            if (min == 0) {
+                min = min + 1;
+            }
+
             for (int j = 0; j < 9; j++) {
                 int nrRandom = (int) (Math.random() * 9) + min;
                 cartao[i][j] = nrRandom;
