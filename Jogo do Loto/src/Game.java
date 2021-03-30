@@ -16,14 +16,7 @@ public class Game {
         System.out.println("Introduza o numero sorteado:");
         // introdução do número escolhido
         nrEscolhido = scan.nextInt();
-        if (nrEscolhido > 0 && nrEscolhido < 91) {
-            System.out.println(nrEscolhido);
-        } else {
-            System.out.println("ERRO, Introduza novamente:");
-            nrEscolhido = scan.nextInt();
-        }
-        // falta arranjar uma maneira de fazer um loop nisto
-        // para voltar do else ao if em cima
+
     }
 
     public void setCartao(int i, int j, int valor) {
@@ -31,15 +24,25 @@ public class Game {
     }
 
     public void setNrEscolhido(int nrEscolhido) {
+        Scanner scan = new Scanner(System.in);
         this.nrEscolhido = nrEscolhido;
-  // procurar no cartao a correspondencia ao numero escolhido
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 9; j++) {
-                if(nrEscolhido == cartao[i][j]){
-            // trocar valor igual por 0
-                    this.cartao[i][j] = 0;  
-        }
+        for (int k = 0; k < 90; k++) {
+            nrEscolhido = scan.nextInt();
+            if (nrEscolhido > 0 && nrEscolhido < 91) {
+                // procurar no cartao a correspondencia ao numero escolhido
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        if (nrEscolhido == cartao[i][j]) {
+                            // trocar valor igual por 0
+                            this.cartao[i][j] = 0;
+                        }
+                    }
+                }
 
+            } else {
+                System.out.println("Erro. Digite de novo:");
+            }
+        }
     }
 
     private int[][] generateCartao() {
