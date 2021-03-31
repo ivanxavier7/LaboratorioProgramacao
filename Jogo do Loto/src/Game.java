@@ -74,8 +74,12 @@ public class Game {
                 for (int p = 0; p < 3; p++) {
                     if (i != p) {
                         while (cartao[i][j] == cartao[p][j]) {
+
                             int min = (int) (cartao[i][j] / 10);
                             cartao[i][j] = (int) (Math.random() * 9) + min * 10;
+                            if (min == 0) {
+                                min = min + 1;
+                            }
                         }
                     }
                 }
