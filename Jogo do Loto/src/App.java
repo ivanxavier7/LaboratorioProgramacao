@@ -11,6 +11,7 @@ public class App {
                     try {
                         int numero = scan.nextInt();
                         if (numero > 0 && numero <= 90) {
+                            System.out.println("Introduza o numero sorteado:");
                             jogo.setNrEscolhido(numero);
                         if(jogo.isConclusaoCartao()) {
                             System.out.println("Chamou a funcao! Introduzir aqui a parte de continuar");

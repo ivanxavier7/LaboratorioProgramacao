@@ -9,15 +9,13 @@ public class Game {
     public void getCartao() {
         // Print card
         System.out.println("Cartão recebido:");
-        System.out.println(Arrays.deepToString(cartao));
+        //System.out.println(Arrays.deepToString(cartao));
         System.out.println(Arrays.deepToString(cartao)
                 .replace("],", "\n")
                 .replace(",", "\t| ")
                 .replaceAll("[\\[\\]]", " ")
                 .replace(" 0", " X")
                 .replace("99", "  "));
-        System.out.println("Introduza o numero sorteado:");
-
     }
 
     public void setCartao(int i, int j, int valor) {
