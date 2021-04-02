@@ -5,7 +5,7 @@ public class App {
             Scanner scan = new Scanner(System.in);
             Game jogo = new Game();
             try {
-                jogo.generateCartao();
+                //int[][] cartao = jogo.generateCartao();
                 jogo.getCartao();
                 while (true) {
                     try {
@@ -15,6 +15,7 @@ public class App {
                             jogo.setNrEscolhido(numero);
                         if(jogo.isConclusaoCartao()) {
                             System.out.println("Chamou a funcao! Introduzir aqui a parte de continuar");
+                            jogo.getCartaoOriginal(); // Cartao Original
                             break;
                         }
                         } else {
@@ -22,6 +23,7 @@ public class App {
                         }
                     } catch (Exception e) {
                         System.out.println("Ocorreu um erro! Por favor digite de novo: 2" + e);
+                        break;
                     }                    
                 }
             } catch (Exception e) {

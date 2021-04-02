@@ -3,8 +3,13 @@ import java.util.Random;
 
 public class Game {
     private int[][] cartao = new int[3][9];
+    private int[][] cartaoOriginal = new int[3][9];
     private int nrEscolhido;
     private boolean conclusaoCartao;
+
+    public Game() {
+        this.cartao = generateCartao();
+    }
 
     public void getCartao() {
         // Print card
@@ -18,8 +23,16 @@ public class Game {
                 .replace("99", "  "));
     }
 
-    public void setCartao(int i, int j, int valor) {
-        this.cartao[i][j] = valor;
+    public void getCartaoOriginal() {
+        // Print card
+        System.out.println("Cartão recebido:");
+        //System.out.println(Arrays.deepToString(cartao));
+        System.out.println(Arrays.deepToString(cartaoOriginal)
+                .replace("],", "\n")
+                .replace(",", "\t| ")
+                .replaceAll("[\\[\\]]", " ")
+                .replace(" 0", " X")
+                .replace("99", "  "));
     }
 
     public void setNrEscolhido(int nrEscolhido) {
@@ -54,6 +67,7 @@ public class Game {
             for (int j = 0; j < 9; j++) {
                 int nrRandom = (int) (Math.random() * 9) + min;
                 cartao[i][j] = nrRandom;
+                cartaoOriginal[i][j] = nrRandom;
 
                 if (j == 0) {
                     min += 9;
@@ -79,8 +93,10 @@ public class Game {
                             int x = (int) (Math.random() * 9) + coluna * 10;
                             if (x == 0) {
                                 cartao[i][j] = 1;
+                                cartaoOriginal[i][j] = 1;
                             } else {
                                 cartao[i][j] = x;
+                                cartaoOriginal[i][j] = x;
                             }
                         }
                     }
@@ -96,6 +112,7 @@ public class Game {
             //System.out.println(Arrays.toString(posicoes));
             for (int j=0; j<4; j++) {
                 cartao[i][posicoes[j]] = 99;
+                cartaoOriginal[i][posicoes[j]] = 99;    
             }
         }
     }
@@ -116,4 +133,5 @@ public class Game {
         }
         return conclusaoCartao;
     }
+
 }
