@@ -9,9 +9,9 @@ public class App {
                 jogo.getCartao();
                 while (true) {
                     try {
+                        System.out.println("Introduza o numero sorteado:");
                         int numero = scan.nextInt();
-                        if (numero > 0 && numero <= 90) {
-                            System.out.println("Introduza o numero sorteado:");
+                        if (numero > 0 && numero <= 90) {    
                             jogo.setNrEscolhido(numero);
                         if(jogo.isConclusaoCartao()) {
                             System.out.println("Chamou a funcao! Introduzir aqui a parte de continuar");
