@@ -24,7 +24,7 @@ public class Game {
                 .replace("99", "  "));
     }
 
-    public Boolean getCartaoOriginal() {
+    public void getCartaoOriginal() {
         Scanner scan = new Scanner(System.in);
         
         // Print card
@@ -41,10 +41,11 @@ public class Game {
         if (resposta.equals("sim") || resposta.equals("Sim")|| resposta.equals("S") || resposta.equals("s") || resposta.equals("")){
             this.cartao = cartaoOriginal;
             getCartao();
-            return true;
+
         }
         else {
-            return false;
+            this.cartao = generateCartao();
+            getCartao();
         }
         
     }
@@ -141,7 +142,6 @@ public class Game {
                 }
             }
         }
-        //System.out.println("NR em falta " +  nrEmFalta);
         if(nrEmFalta == 0) {
             conclusaoCartao = true;
         }

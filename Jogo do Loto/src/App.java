@@ -14,9 +14,7 @@ public class App {
                         if (numero > 0 && numero <= 90) {    
                             jogo.setNrEscolhido(numero);
                         if(jogo.isConclusaoCartao()) {                                                                            
-                            if(jogo.getCartaoOriginal() == false) {
-                                break;
-                        };
+                            jogo.getCartaoOriginal();
                         }
                         } else {
                             System.out.println("Ocorreu um erro! Por favor digite de novo: 1");
