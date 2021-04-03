@@ -13,10 +13,10 @@ public class App {
                         int numero = scan.nextInt();
                         if (numero > 0 && numero <= 90) {    
                             jogo.setNrEscolhido(numero);
-                        if(jogo.isConclusaoCartao()) {
-                            System.out.println("Chamou a funcao! Introduzir aqui a parte de continuar");
-                            jogo.getCartaoOriginal(); // Cartao Original
-                            break;
+                        if(jogo.isConclusaoCartao()) {                                                                            
+                            if(jogo.getCartaoOriginal() == false) {
+                                break;
+                        };
                         }
                         } else {
                             System.out.println("Ocorreu um erro! Por favor digite de novo: 1");

@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Game {
     private int[][] cartao = new int[3][9];
@@ -23,9 +24,11 @@ public class Game {
                 .replace("99", "  "));
     }
 
-    public void getCartaoOriginal() {
+    public Boolean getCartaoOriginal() {
+        Scanner scan = new Scanner(System.in);
+        
         // Print card
-        System.out.println("Cartão recebido:");
+        System.out.println("Cartão original:");
         //System.out.println(Arrays.deepToString(cartao));
         System.out.println(Arrays.deepToString(cartaoOriginal)
                 .replace("],", "\n")
@@ -33,6 +36,17 @@ public class Game {
                 .replaceAll("[\\[\\]]", " ")
                 .replace(" 0", " X")
                 .replace("99", "  "));
+        System.out.println("Deseja continuar a jogar com o mesmo cartão? S/n");
+        String resposta = scan.nextLine();
+        if (resposta.equals("sim") || resposta.equals("Sim")|| resposta.equals("S") || resposta.equals("s") || resposta.equals("")){
+            this.cartao = cartaoOriginal;
+            getCartao();
+            return true;
+        }
+        else {
+            return false;
+        }
+        
     }
 
     public void setNrEscolhido(int nrEscolhido) {
