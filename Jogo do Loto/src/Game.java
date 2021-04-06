@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Game {
     private int[][] cartao = new int[3][9];
     private int[][] cartaoOriginal = new int[3][9];
+    private int[][] cartaoVelho = new int[3][9];
     private int nrEscolhido;
     private boolean conclusaoCartao;
 
@@ -39,7 +40,15 @@ public class Game {
         System.out.println("Deseja continuar a jogar com o mesmo cartão? S/n");
         String resposta = scan.nextLine();
         if (resposta.equals("sim") || resposta.equals("Sim")|| resposta.equals("S") || resposta.equals("s") || resposta.equals("")){
+            if(cartao != cartaoVelho){
+                cartao = cartaoVelho;
+            }
+            
+            }
             this.cartao = cartaoOriginal;
+            if(cartaoOriginal != cartaoVelho){
+                cartaoOriginal = cartaoVelho;
+            
             getCartao();
 
         }
@@ -83,6 +92,7 @@ public class Game {
                 int nrRandom = (int) (Math.random() * 9) + min;
                 cartao[i][j] = nrRandom;
                 cartaoOriginal[i][j] = nrRandom;
+                cartaoVelho[i][j] = nrRandom;
 
                 if (j == 0) {
                     min += 9;
@@ -109,9 +119,11 @@ public class Game {
                             if (x == 0) {
                                 cartao[i][j] = 1;
                                 cartaoOriginal[i][j] = 1;
+                                cartaoVelho[i][j] = 1;
                             } else {
                                 cartao[i][j] = x;
                                 cartaoOriginal[i][j] = x;
+                                cartaoVelho[i][j] = x;
                             }
                         }
                     }
@@ -123,11 +135,12 @@ public class Game {
     private void setWhiteSpaces() {
         int[] posicoes;
         for (int i=0; i<3; i++){
-            posicoes = new Random().ints(0, 9).distinct().limit(4).toArray();
+            posicoes = new Random().ints(0, 9).distinct().limit(8).toArray();
             //System.out.println(Arrays.toString(posicoes));
-            for (int j=0; j<4; j++) {
+            for (int j=0; j<8; j++) {
                 cartao[i][posicoes[j]] = 99;
-                cartaoOriginal[i][posicoes[j]] = 99;    
+                cartaoOriginal[i][posicoes[j]] = 99;  
+                cartaoVelho[i][posicoes[j]] = 99;  
             }
         }
     }
