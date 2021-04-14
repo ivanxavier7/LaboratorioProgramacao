@@ -4,7 +4,7 @@ import java.util.Scanner;
  * <p>
  * Main Application Class
  * @author Ivan Xavier - 92441
- * @author Simao Silva - 102914
+ * @author Simão Silva - 102914
  * @version 1.0
  */
 public class App {

@@ -5,7 +5,7 @@ import java.util.Random;
  * Lotto Game developed for the curricular unit in Programming Laboratories
  * Game Class
  * @author Ivan Xavier - 92441
- * @author Simao Silva - 102914
+ * @author Simão Silva - 102914
  * @version 1.0
  */
 
