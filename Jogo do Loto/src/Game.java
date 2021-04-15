@@ -1,6 +1,8 @@
 import java.util.Arrays;
 import java.util.Random;
 
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
+
 /**
  * Lotto Game developed for the curricular unit in Programming Laboratories
  * Game Class
@@ -10,6 +12,9 @@ import java.util.Random;
  */
 
 public class Game {
+
+    private static final String StringMenu = null;
+
 
     /**
      * Generates the lotto card
@@ -127,10 +132,11 @@ public class Game {
      * we change the symbol " -" to an "X " in order to mark the choice.
      * @param nrEscolhido int chosen by the user to be validated and assigned
      * @param cartao int[3x][9x] card to be marked
-     * @since 1.0
+     * @since 1.1
      */
     public void setNrEscolhido(int nrEscolhido, int[][] cartao) {
         try {
+            boolean nrChosen = false;
             boolean nrExist = false;
             if (nrEscolhido > 0 && nrEscolhido < 91) {
                 for (int lin=0; lin<3; lin++) {
@@ -138,14 +144,19 @@ public class Game {
                         if (nrEscolhido == cartao[lin][col]) {
                             cartao[lin][col] = 0 - cartao[lin][col];
                             nrExist = true;
+
+                        } else if(nrEscolhido == -cartao[lin][col]){
+                            nrChosen = true;
                         }
                     }
-                }
-                if (nrExist == false) {  
-                    System.out.println("Infelizmente esse numero não aparece no cartão ou ja foi usado");
-                }
+                }                
             } else {
                 System.out.println("Erro, Digite um valor de 1 a 90!");
+            } 
+            if (nrChosen == true) {  
+            System.out.println("Este número já foi escolhido");
+            } else if (nrExist == false) {  
+            System.out.println("Infelizmente este numero não aparece no cartão");      
             }
         } catch (Exception e) {
             System.out.println("Erro, Digite um valor válido!");
@@ -206,5 +217,33 @@ public class Game {
         if (resposta.equals("sim") || resposta.equals("Sim")|| resposta.equals("S") || resposta.equals("s") || resposta.equals("")){
             return true;
         } return false;
+    }
+
+
+    /**
+     * 
+     * 
+     * @return a Menu of the game
+     */
+    public String getStringMenu(){
+        System.out.printf("\n" +
+        "----------------------------------\n"  +
+        "--------BEM VINDO AO LOTO!--------\n" +
+       "----------------------------------\n" +
+        "\n" +
+        "\n" +
+        "BREVE RESUMO DO LOTO \n" +
+        "O objetivo do loto é bem simples, assim que o cartão é concedido ao jogador \n" +
+        "ele terá de completar o numero de linhas e colunas da matriz. Os números \n" +
+        "que aparecerem marcados com um 'x' são os numeros pertencentes ao cartao que o jogador já obteve. \n" +
+        "Vence quem conseguir completar o cartão primeiro. \n" +
+        "Os numeros admitidos neste loto vão de 1 a 90 inclusive. No final do jogo, o jogador poderá \n" +
+        "voltar a jogar com o mesmo o cartão, terá a opção de criar um novo cartão e a opção de abandonar \n" +
+        "o jogo. \n " +
+        "Boa Sorte! \n" +
+        "\n" +
+        "\n");
+          
+       return StringMenu;
     }
 }
