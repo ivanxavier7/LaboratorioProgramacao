@@ -142,7 +142,7 @@ public class Game {
                     }
                 }
                 if (nrExist == false) {  
-                    System.out.println("Erro, Não existe esse número no cartão!");
+                    System.out.println("Infelizmente esse numero não aparece no cartão ou ja foi usado");
                 }
             } else {
                 System.out.println("Erro, Digite um valor de 1 a 90!");

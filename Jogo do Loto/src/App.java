@@ -27,7 +27,25 @@ public class App {
      * @throws Exception simple error message, printed on the console 
      * @since 1.0
      */
-    public static void main(String[] args) throws Exception {        
+    public static void main(String[] args) throws Exception {  
+
+        System.out.println("");
+        System.out.println("----------------------------------");
+        System.out.println("--------BEM VINDO AO LOTO!--------");
+        System.out.println("----------------------------------");
+        System.out.println("");
+
+        System.out.println("BREVE RESUMO DO LOTO");
+        System.out.println("O objetivo do loto é bem simples, assim que o cartão é concedido ao jogador");
+        System.out.println("ele terá de completar o numero de linhas e colunas da matriz. Os números");
+        System.out.println("sorteados não serão feitos aqui para permitir que mais pessoas possam jogar.");
+        System.out.println("Vence quem conseguir completar o cartão primeiro.");
+        System.out.println("Este loto foi construido de maneira a que o jogador precise apenas de");
+        System.out.println("introduzir um número valido(1 a 90 inclusivos) para começar a se divertir");
+        System.out.println("Boa Sorte!");
+        System.out.println("");
+        System.out.println("");
+        
         try {
             Game jogo = new Game();   
             cartao = jogo.generateCartao();
@@ -42,7 +60,10 @@ public class App {
                     int numero = scan.nextInt();   
                     jogo.setNrEscolhido(numero, cartao);
                     // Asks if the card is complete
-                    if(jogo.isConclusaoCartao(cartao)) { 
+                    if(jogo.isConclusaoCartao(cartao)) {
+                        
+// ve aqui sfv
+                        try {
                         System.out.println("Parabéns, Ganhou o Jogo!");
                         // Print the original card on the console
                         System.out.println("Cartão Original:\n" + jogo.getStringCartao(cartaoOriginal));
@@ -55,13 +76,16 @@ public class App {
                             break;
                         } 
                         // Restart the game depending on the answer
-                        if(jogo.restartGame(resposta)) {
+                        if(resposta.equals("S") || resposta.equals("sim") || resposta.equals("Sim") || resposta.equals("s")){
                             jogo.getClone(cartao, cartaoOriginal);
                         }
-                        else {
+                        if(resposta.equals("N") || resposta.equals("nao") || resposta.equals("Nao") || resposta.equals("n")){
                             cartao = jogo.generateCartao();
                             jogo.getClone(cartaoOriginal, cartao);    
-                        }                                                                     
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Nao conseguimos compreender a sua decisão, diga nos de novo");
+                    }                                                                     
                     }    
                 } catch (Exception e) {
                     System.out.println("Ocorreu um erro! Por favor digite um valor válido: ");
