@@ -39,7 +39,8 @@ Exercícios e trabalhos realizados no âmbito da unidade curricular "Laboratóri
 
 Variáveis
 
-    Array 2D                                                 
+    Array 2D
+    ArrayCópia 2D
     Número escolhido
 
 Métodos
