@@ -1,3 +1,12 @@
+## Como codificar o código
+```
+javac -encoding UTF8 src/*
+```
+## Como correr o código
+```
+java -cp . App
+```
+
 # LaboratorioProgramacao
 Exercícios e trabalhos realizados no âmbito da unidade curricular "Laboratório de Programação"
 
@@ -36,20 +45,27 @@ Variáveis
 Métodos
 
     Gerar o cartão
-    Receber número
-    Validar resultado da linha
-    Devolver cartão modificado
-    Reiniciar Jogo
-    Reiniciar com o mesmo cartão
+    Trocar Repetidos
+    Colocar Espaços em Branco
+    Pedir Cartão
+    Pedir Menu
+    Atribuir número escolhido
+    Copiar o cartão original
+    Verificar conclusão do cartão
+    Reiniciar o Jogo
+    
 Validação simples e de exceções
 
-2D
+Percorrer listas bidimensionais 
 
 ```java
-int[][] arr = { { 1, 2 }, { 3, 4 } };
-for (int i = 0; i < 2; i++)
-    for (int j = 0; j < 2; j++)
-        System.out.println("arr[" + i + "][" + j + "] = " + arr[i][j]);
+    public void getClone(int[][] cartaoCopia, int[][] cartao) {
+        for (int lin = 0; lin<3; lin++) {
+            for (int col = 0; col < 9; col++) {
+                cartaoCopia[lin][col] = cartao[lin][col];
+            }
+        }
+    }
 ```
 
 ### Jogador
@@ -57,13 +73,6 @@ for (int i = 0; i < 2; i++)
 * Implementa objeto do jogo
 * Recebe cartão
 * Introduz números
-* Reinicia
+* Reinicia ou Saí
 
-## Encoding
-```
-javac -encoding UTF8 src/*
-```
-## Run
-```
-java -cp . App
-```
+
