@@ -96,8 +96,8 @@ public class Game {
     private void setWhiteSpaces(int [][] cartao) {
         int[] posicoes;
         for (int lin=0; lin<3; lin++){
-            posicoes = new Random().ints(0, 9).distinct().limit(0).toArray();
-            for (int j=0; j<0; j++) {
+            posicoes = new Random().ints(0, 9).distinct().limit(8).toArray();
+            for (int j=0; j<8; j++) {
                 cartao[lin][posicoes[j]] = 99;  
             }
         }
@@ -147,13 +147,13 @@ public class Game {
                         }
                     }
                 }                
-            } else if (nrEscolhido <= 0 || nrEscolhido > 90) {
+            } else {
                 System.out.println("Erro, Digite um valor de 1 a 90!");
+            } if (nrChosen == true) {  
+                System.out.println("Este número já foi escolhido");
             } else if (nrExist == false) {  
-                System.out.println("Infelizmente este número não aparece no cartão");
-            } else if (nrChosen == true) {  
-            System.out.println("Este número já foi escolhido");
-            } 
+                System.out.println("Infelizmente este número não existe no cartão");
+            }
         } catch (Exception e) {
             System.out.println("Erro, Digite um valor válido!");
         }
@@ -218,10 +218,16 @@ public class Game {
      * @return Boolean translation of the answer to positive or negative
      * @since 1.0
      */
-    public Boolean restartGame(String resposta) {
-        if (resposta.equals("sim") || resposta.equals("Sim")|| resposta.equals("S") || resposta.equals("s") || resposta.equals("")){
-            return true;
-        } return false;
+    public String restartGame(String resposta) {
+        if(resposta.equals("sim") || resposta.equals("Sim")|| resposta.equals("S") || resposta.equals("s") || resposta.equals("")){
+            return "sim";
+        } else if(resposta.equals("Sair") || resposta.equals("sair")){
+            return "sair";}
+        else if(resposta.equals("nao") || resposta.equals("Nao")|| resposta.equals("N") || resposta.equals("n")){
+            return "nao";}
+        else {
+            return "";
+        }
     }
 
 

@@ -32,11 +32,12 @@ public class App {
          
         
         try {
-            Game jogo = new Game();   
+            Game jogo = new Game();
+            Boolean run = true;  
             jogo.getStringMenu();
             cartao = jogo.generateCartao();
             jogo.getClone(cartaoOriginal, cartao);
-            while (true) {
+            while (run) {
                 try {    
                     Scanner scan = new Scanner(System.in);
                     // Print the card on the console
@@ -51,24 +52,29 @@ public class App {
                         System.out.println("Parabéns, Ganhou o Jogo!");
                         // Print the original card on the console
                         System.out.println("Cartão Original:\n" + jogo.getStringCartao(cartaoOriginal));
-                        // Asks the user if he wants to continue playing
-                        System.out.println("Deseja continuar a jogar com o mesmo cartão? S/n ou Sair");
-                        String resposta = scan.next();
-                        if(resposta.equals("Sair") || resposta.equals("sair")) {
-                            System.out.println("Obrigado, volte sempre!");
-                            scan.close();
-                            break;
-                        } 
                         // Restart the game depending on the answer
-                        if(resposta.equals("S") || resposta.equals("sim") || resposta.equals("Sim") || resposta.equals("s")){
-                            jogo.getClone(cartao, cartaoOriginal);
-                        }
-                        if(resposta.equals("N") || resposta.equals("nao") || resposta.equals("Nao") || resposta.equals("n")){
-                            cartao = jogo.generateCartao();
-                            jogo.getClone(cartaoOriginal, cartao);    
+                        while (true) {
+                            // Asks the user if he wants to continue playing
+                            System.out.println("Deseja continuar a jogar com o mesmo cartão? S/n ou Sair");
+                            String resposta = scan.next();
+                            if(jogo.restartGame(resposta).equals("sim")){
+                                jogo.getClone(cartao, cartaoOriginal);
+                                break;
+                            } else if(jogo.restartGame(resposta).equals("sair")) {
+                                System.out.println("Obrigado, volte sempre!");
+                                scan.close();
+                                run = false;
+                            } else if(jogo.restartGame(resposta).equals("nao")){
+                                cartao = jogo.generateCartao();
+                                jogo.getClone(cartaoOriginal, cartao);
+                                break;    
+                            } else{
+                                System.out.println("Por favor escolha \"Sim\", \"Não\" ou \"Sair!\"");
+                                continue;
+                            }
                         }
                     } catch (Exception e) {
-                        System.out.println("Nao conseguimos compreender a sua decisão, diga nos de novo");
+                        System.out.println("Obrigado por jogar o Loto, volte sempre!");
                     }                                                                     
                     }    
                 } catch (Exception e) {
