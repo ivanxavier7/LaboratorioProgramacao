@@ -1,7 +1,6 @@
 import java.util.Arrays;
 import java.util.Random;
 
-import javax.swing.text.DefaultStyledDocument.ElementSpec;
 
 /**
  * Lotto Game developed for the curricular unit in Programming Laboratories
@@ -12,9 +11,7 @@ import javax.swing.text.DefaultStyledDocument.ElementSpec;
  */
 
 public class Game {
-
-    private static final String StringMenu = null;
-
+    private int[] linhas = new int[3];
 
     /**
      * Generates the lotto card
@@ -76,9 +73,9 @@ public class Game {
                             } 
                             int novoNr = (int) (Math.random() * 9) + coluna * 10;
                             if (novoNr == 0) {
-                                cartao[lin][col] = 1;
+                                cartao[lin2][col] = 1;
                             } else {
-                                cartao[lin][col] = novoNr;
+                                cartao[lin2][col] = novoNr;
                             }
                         }
                     }
@@ -99,8 +96,8 @@ public class Game {
     private void setWhiteSpaces(int [][] cartao) {
         int[] posicoes;
         for (int lin=0; lin<3; lin++){
-            posicoes = new Random().ints(0, 9).distinct().limit(4).toArray();
-            for (int j=0; j<4; j++) {
+            posicoes = new Random().ints(0, 9).distinct().limit(0).toArray();
+            for (int j=0; j<0; j++) {
                 cartao[lin][posicoes[j]] = 99;  
             }
         }
@@ -150,14 +147,13 @@ public class Game {
                         }
                     }
                 }                
-            } else {
+            } else if (nrEscolhido <= 0 || nrEscolhido > 90) {
                 System.out.println("Erro, Digite um valor de 1 a 90!");
-            } 
-            if (nrChosen == true) {  
-            System.out.println("Este número já foi escolhido");
             } else if (nrExist == false) {  
-            System.out.println("Infelizmente este numero não aparece no cartão");      
-            }
+                System.out.println("Infelizmente este número não aparece no cartão");
+            } else if (nrChosen == true) {  
+            System.out.println("Este número já foi escolhido");
+            } 
         } catch (Exception e) {
             System.out.println("Erro, Digite um valor válido!");
         }
@@ -193,15 +189,24 @@ public class Game {
     public boolean isConclusaoCartao(int[][] cartao) {
         int nrEmFalta = 0;
         for (int lin = 0; lin<3; lin++) {
+            int nrEmFaltaNaLinha = 0;
             for (int col = 0; col < 9; col++) {
                 if (cartao[lin][col] >= 0 && cartao[lin][col] != 99) {
                     nrEmFalta ++;
+                    nrEmFaltaNaLinha ++;
                 }
             }
+            if(nrEmFaltaNaLinha == 0) {                
+                if(linhas[lin] == 0) {                   
+                    System.out.println("Parabéns concluío a linha número: " + (lin + 1));
+                    linhas[lin] = 1;
+                }    
+            }     
         }
         if(nrEmFalta == 0) {
             return true;
         } return false;
+        
     }
      
     /** 
@@ -226,7 +231,7 @@ public class Game {
      * @return a Menu of the game
      */
     public String getStringMenu(){
-        System.out.printf("\n" +
+        return "\n" +
         "----------------------------------\n"  +
         "--------BEM VINDO AO LOTO!--------\n" +
        "----------------------------------\n" +
@@ -239,11 +244,9 @@ public class Game {
         "Vence quem conseguir completar o cartão primeiro. \n" +
         "Os numeros admitidos neste loto vão de 1 a 90 inclusive. No final do jogo, o jogador poderá \n" +
         "voltar a jogar com o mesmo o cartão, terá a opção de criar um novo cartão e a opção de abandonar \n" +
-        "o jogo. \n " +
-        "Boa Sorte! \n" +
+        "o jogo. \n" +
+        "Boa Sorte! \n\n\n" +
         "\n" +
-        "\n");
-          
-       return StringMenu;
+        "\n";
     }
 }
