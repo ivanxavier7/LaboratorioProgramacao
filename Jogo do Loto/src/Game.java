@@ -123,6 +123,30 @@ public class Game {
     }
 
     /**
+     * Returns the menu to be printed on the console.
+     * <p>
+     * This method show a little resume of the game.
+     * @return a string with the game menu
+     * @since 1.3
+     */
+    public String getStringMenu(){
+        return "\n" 
+        + "----------------------------------\n"
+        + "------- BEM VINDO AO LOTO! -------\n"
+        + "----------------------------------\n\n"
+        + "O objetivo do loto é simples, assim que o cartão é concedido ao jogador, \n"
+        + "ele terá de completar o número de linhas e colunas da matriz.\n\n"
+        + "Os números que aparecerem marcados com um 'X',\n"
+        + "são os numeros pertencentes ao cartão que o jogador já obteve. \n\n"
+        + "Regras do Jogo:\n"
+        + "  - Vence quem conseguir completar o cartão primeiro. \n"
+        + "  - Os números admitidos neste loto vão de 1 a 90 inclusive.\n"
+        + "  - No final do jogo, o jogador poderá voltar a jogar com o mesmo o cartão.\n"
+        + "  - Terá a opção de criar um novo cartão, continuar ou abandonar o jogo. \n\n"
+        + "Boa Sorte!";
+    }
+
+    /**
      * Validates and assigned to the chosen number
      * <p>
      * Validates the entry of the chosen number and check if the number exists on the card,
@@ -230,29 +254,5 @@ public class Game {
         else {
             return "";
         }
-    }
-
-    /**
-     * Returns the menu to be printed on the console.
-     * <p>
-     * This method show a little resume of the game.
-     * @return a string with the game menu
-     * @since 1.3
-     */
-    public String getStringMenu(){
-        return "\n" 
-        + "----------------------------------\n"
-        + "------- BEM VINDO AO LOTO! -------\n"
-        + "----------------------------------\n\n"
-        + "O objetivo do loto é simples, assim que o cartão é concedido ao jogador, \n"
-        + "ele terá de completar o número de linhas e colunas da matriz.\n\n"
-        + "Os números que aparecerem marcados com um 'X',\n"
-        + "são os numeros pertencentes ao cartão que o jogador já obteve. \n\n"
-        + "Regras do Jogo:\n"
-        + "  - Vence quem conseguir completar o cartão primeiro. \n"
-        + "  - Os números admitidos neste loto vão de 1 a 90 inclusive.\n"
-        + "  - No final do jogo, o jogador poderá voltar a jogar com o mesmo o cartão.\n"
-        + "  - Terá a opção de criar um novo cartão, continuar ou abandonar o jogo. \n\n"
-        + "Boa Sorte!";
     }
 }
