@@ -1,8 +1,8 @@
-# Como codificar o código
+# Codificar o código
 ```
 javac -encoding UTF8 src/*
 ```
-# Como correr o código
+# Correr o código
 ```
 java -cp . App
 ```
