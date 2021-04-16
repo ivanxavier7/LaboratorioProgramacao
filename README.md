@@ -58,3 +58,12 @@ for (int i = 0; i < 2; i++)
 * Recebe cartão
 * Introduz números
 * Reinicia
+
+## Encoding
+```
+javac -encoding UTF8 src/*
+```
+## Run
+```
+java -cp . App
+```

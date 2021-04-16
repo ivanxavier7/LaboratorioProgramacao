@@ -232,27 +232,20 @@ public class Game {
 
 
     /**
-     * 
-     * 
-     * @return a Menu of the game
+     * Returns the menu to be printed on the console.
+     * <p>
+     * This method show a little resume of the game.
+     * @return a string with the game menu
      */
     public String getStringMenu(){
-        return "\n" +
-        "----------------------------------\n"  +
-        "--------BEM VINDO AO LOTO!--------\n" +
-       "----------------------------------\n" +
-        "\n" +
-        "\n" +
-        "BREVE RESUMO DO LOTO \n" +
-        "O objetivo do loto é bem simples, assim que o cartão é concedido ao jogador \n" +
-        "ele terá de completar o numero de linhas e colunas da matriz. Os números \n" +
-        "que aparecerem marcados com um 'x' são os numeros pertencentes ao cartao que o jogador já obteve. \n" +
-        "Vence quem conseguir completar o cartão primeiro. \n" +
-        "Os numeros admitidos neste loto vão de 1 a 90 inclusive. No final do jogo, o jogador poderá \n" +
-        "voltar a jogar com o mesmo o cartão, terá a opção de criar um novo cartão e a opção de abandonar \n" +
-        "o jogo. \n" +
-        "Boa Sorte! \n\n\n" +
-        "\n" +
-        "\n";
+        return "\n" + "----------------------------------\n" + "--------BEM VINDO AO LOTO!--------\n"
+        + "----------------------------------\n\n" + "BREVE RESUMO DO LOTO \n\n"
+        + "O objetivo do loto é bem simples, assim que o cartão é concedido ao jogador \n"
+        + "ele terá de completar o número de linhas e colunas da matriz. Os números \n"
+        + "que aparecerem marcados com um 'x' são os numeros pertencentes ao cartão que o jogador já obteve. \n"
+        + "Vence quem conseguir completar o cartão primeiro. \n\n"
+        + "Os numeros admitidos neste loto vão de 1 a 90 inclusive. No final do jogo, o jogador poderá \n"
+        + "voltar a jogar com o mesmo o cartão, terá a opção de criar um novo cartão e a opção de abandonar \n"
+        + "o jogo. \n\n" + "Boa Sorte! \n\n";
     }
 }

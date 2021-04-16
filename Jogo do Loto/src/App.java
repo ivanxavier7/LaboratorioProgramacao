@@ -34,7 +34,7 @@ public class App {
         try {
             Game jogo = new Game();
             Boolean run = true;  
-            jogo.getStringMenu();
+            System.out.println(jogo.getStringMenu());
             cartao = jogo.generateCartao();
             jogo.getClone(cartaoOriginal, cartao);
             while (run) {
