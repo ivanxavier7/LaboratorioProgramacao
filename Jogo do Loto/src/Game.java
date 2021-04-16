@@ -91,13 +91,13 @@ public class Game {
      * then assigns the value of 99 to those positions, when we use the substitution method to show the card on the console,
      * all values ​​with 99 are replaced by “ “, We can use this value because it is not within the range.
      * @param cartao int[3x][9x] card where you want to assign the blanks spaces
-     * @since 1.0
+     * @since 1.3
      */
     private void setWhiteSpaces(int [][] cartao) {
         int[] posicoes;
         for (int lin=0; lin<3; lin++){
-            posicoes = new Random().ints(0, 9).distinct().limit(8).toArray();
-            for (int j=0; j<8; j++) {
+            posicoes = new Random().ints(0, 9).distinct().limit(4).toArray();
+            for (int j=0; j<4; j++) {
                 cartao[lin][posicoes[j]] = 99;  
             }
         }
@@ -113,7 +113,8 @@ public class Game {
      * @since 1.0
      */
     public String getStringCartao(int[][] cartao) {
-        return Arrays.deepToString(cartao)
+        return "\n" +
+                Arrays.deepToString(cartao)
                 .replace("],", "\n")
                 .replace(",", "\t| ")
                 .replaceAll("[\\[\\]]", " ")
@@ -129,7 +130,7 @@ public class Game {
      * we change the symbol " -" to an "X " in order to mark the choice.
      * @param nrEscolhido int chosen by the user to be validated and assigned
      * @param cartao int[3x][9x] card to be marked
-     * @since 1.1
+     * @since 1.3
      */
     public void setNrEscolhido(int nrEscolhido, int[][] cartao) {
         try {
@@ -146,13 +147,14 @@ public class Game {
                             nrChosen = true;
                         }
                     }
+                }
+                if (nrChosen == true) {  
+                    System.out.println("Este número já foi escolhido!");
+                } else if (nrExist == false) {  
+                    System.out.println("Infelizmente este número não existe no cartão!");
                 }                
             } else {
                 System.out.println("Erro, Digite um valor de 1 a 90!");
-            } if (nrChosen == true) {  
-                System.out.println("Este número já foi escolhido");
-            } else if (nrExist == false) {  
-                System.out.println("Infelizmente este número não existe no cartão");
             }
         } catch (Exception e) {
             System.out.println("Erro, Digite um valor válido!");
@@ -198,7 +200,7 @@ public class Game {
             }
             if(nrEmFaltaNaLinha == 0) {                
                 if(linhas[lin] == 0) {                   
-                    System.out.println("Parabéns concluío a linha número: " + (lin + 1));
+                    System.out.println("\nA linha " + (lin + 1) + " foi concluída!\n");
                     linhas[lin] = 1;
                 }    
             }     
@@ -216,10 +218,10 @@ public class Game {
      * this method allows this conversion.
      * @param resposta a string to interpret the positive answer
      * @return Boolean translation of the answer to positive or negative
-     * @since 1.0
+     * @since 1.2
      */
     public String restartGame(String resposta) {
-        if(resposta.equals("sim") || resposta.equals("Sim")|| resposta.equals("S") || resposta.equals("s") || resposta.equals("")){
+        if(resposta.equals("sim") || resposta.equals("Sim")|| resposta.equals("S") || resposta.equals("s")){
             return "sim";
         } else if(resposta.equals("Sair") || resposta.equals("sair")){
             return "sair";}
@@ -230,22 +232,27 @@ public class Game {
         }
     }
 
-
     /**
      * Returns the menu to be printed on the console.
      * <p>
      * This method show a little resume of the game.
      * @return a string with the game menu
+     * @since 1.3
      */
     public String getStringMenu(){
-        return "\n" + "----------------------------------\n" + "--------BEM VINDO AO LOTO!--------\n"
-        + "----------------------------------\n\n" + "BREVE RESUMO DO LOTO \n\n"
-        + "O objetivo do loto é bem simples, assim que o cartão é concedido ao jogador \n"
-        + "ele terá de completar o número de linhas e colunas da matriz. Os números \n"
-        + "que aparecerem marcados com um 'x' são os numeros pertencentes ao cartão que o jogador já obteve. \n"
-        + "Vence quem conseguir completar o cartão primeiro. \n\n"
-        + "Os numeros admitidos neste loto vão de 1 a 90 inclusive. No final do jogo, o jogador poderá \n"
-        + "voltar a jogar com o mesmo o cartão, terá a opção de criar um novo cartão e a opção de abandonar \n"
-        + "o jogo. \n\n" + "Boa Sorte! \n\n";
+        return "\n" 
+        + "----------------------------------\n"
+        + "------- BEM VINDO AO LOTO! -------\n"
+        + "----------------------------------\n\n"
+        + "O objetivo do loto é simples, assim que o cartão é concedido ao jogador, \n"
+        + "ele terá de completar o número de linhas e colunas da matriz.\n\n"
+        + "Os números que aparecerem marcados com um 'X',\n"
+        + "são os numeros pertencentes ao cartão que o jogador já obteve. \n\n"
+        + "Regras do Jogo:\n"
+        + "  - Vence quem conseguir completar o cartão primeiro. \n"
+        + "  - Os números admitidos neste loto vão de 1 a 90 inclusive.\n"
+        + "  - No final do jogo, o jogador poderá voltar a jogar com o mesmo o cartão.\n"
+        + "  - Terá a opção de criar um novo cartão, continuar ou abandonar o jogo. \n\n"
+        + "Boa Sorte!";
     }
 }

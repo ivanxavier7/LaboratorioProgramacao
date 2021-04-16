@@ -41,15 +41,15 @@ public class App {
                 try {    
                     Scanner scan = new Scanner(System.in);
                     // Print the card on the console
-                    System.out.println("Cartão recebido:\n" + jogo.getStringCartao(cartao)); 
+                    System.out.println("\nCartão recebido:" + jogo.getStringCartao(cartao)); 
                     // Prompts the user to enter a number
-                    System.out.println("Introduza o número sorteado:");
+                    System.out.println("\nIntroduza o número sorteado:");
                     int numero = scan.nextInt();   
                     jogo.setNrEscolhido(numero, cartao);
                     // Asks if the card is complete
                     if(jogo.isConclusaoCartao(cartao)) {
                         try {
-                        System.out.println("Parabéns, Ganhou o Jogo!");
+                        System.out.println("--------- GANHOU O JOGO! ---------\n");
                         // Print the original card on the console
                         System.out.println("Cartão Original:\n" + jogo.getStringCartao(cartaoOriginal));
                         // Restart the game depending on the answer
@@ -62,12 +62,12 @@ public class App {
                                 break;
                             } else if(jogo.restartGame(resposta).equals("sair")) {
                                 System.out.println("Obrigado, volte sempre!");
-                                scan.close();
                                 run = false;
+                                break;
                             } else if(jogo.restartGame(resposta).equals("nao")){
                                 cartao = jogo.generateCartao();
                                 jogo.getClone(cartaoOriginal, cartao);
-                                break;    
+                                break;   
                             } else{
                                 System.out.println("Por favor escolha \"Sim\", \"Não\" ou \"Sair!\"");
                                 continue;
