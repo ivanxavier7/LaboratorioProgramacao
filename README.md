@@ -1,4 +1,4 @@
-# Membros
+# Equipa
 ```
 Ivan Xavier - 92441
 Simão Silva - 102914
