@@ -3,6 +3,7 @@
 Ivan Xavier - 92441
 Simão Silva - 102914
 ```
+# Encoding
 ```
 javac -encoding UTF8 src/*
 ```
