@@ -1,5 +1,6 @@
 # Diagrama de classes
 <img src="img/JogoLotoClasses.png">
+Erros a serem corrigidos mais tarde, o Jogador não têm os métodos associados ao cartão.
 
 # Codificar o código
 ```
