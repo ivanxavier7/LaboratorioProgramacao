@@ -1,19 +1,8 @@
 import java.util.Arrays;
 import java.util.Random;
 
-
-/**
- * Lotto Game developed for the curricular unit in Programming Laboratories
- * Game Class
- * @author Ivan Xavier - 92441
- * @author Simão Silva - 102914
- * @version 1.0
- */
-
-public class Game {
-    private int[] linhas = new int[3];
-    
-    /**
+public class Cartao {
+        /**
      * Generates the lotto card
      * <p>
      * The numbers generated at random are organized in intervals and columns,
@@ -146,46 +135,7 @@ public class Game {
         + "Boa Sorte!";
     }
 
-    /**
-     * Validates and assigned to the chosen number
-     * <p>
-     * Validates the entry of the chosen number and check if the number exists on the card,
-     * if it exists it is converted to its negative, when we replace the card to present on the console,
-     * we change the symbol " -" to an "X " in order to mark the choice.
-     * @param nrEscolhido int chosen by the user to be validated and assigned
-     * @param cartao int[3x][9x] card to be marked
-     * @since 1.3
-     */
-    public void setNrEscolhido(int nrEscolhido, int[][] cartao) {
-        try {
-            boolean nrChosen = false;
-            boolean nrExist = false;
-            if (nrEscolhido > 0 && nrEscolhido < 91) {
-                for (int lin=0; lin<3; lin++) {
-                    for (int col=0; col<9; col++) {
-                        if (nrEscolhido == cartao[lin][col]) {
-                            cartao[lin][col] = 0 - cartao[lin][col];
-                            nrExist = true;
-
-                        } else if(nrEscolhido == -cartao[lin][col]){
-                            nrChosen = true;
-                        }
-                    }
-                }
-                if (nrChosen == true) {  
-                    System.out.println("Este número já foi escolhido!");
-                } else if (nrExist == false) {  
-                    System.out.println("Infelizmente este número não existe no cartão!");
-                }                
-            } else {
-                System.out.println("Erro, Digite um valor de 1 a 90!");
-            }
-        } catch (Exception e) {
-            System.out.println("Erro, Digite um valor válido!");
-        }
-    }
-   
-    /**
+        /**
      * Transfer information from one array to another
      * <p>
      * This method transfers information between two cards
@@ -212,47 +162,4 @@ public class Game {
      * @return boolean translates the verification result to truth or lie
      * @since 1.0
      */
-    public boolean isConclusaoCartao(int[][] cartao) {
-        int nrEmFalta = 0;
-        for (int lin = 0; lin<3; lin++) {
-            int nrEmFaltaNaLinha = 0;
-            for (int col = 0; col < 9; col++) {
-                if (cartao[lin][col] >= 0 && cartao[lin][col] != 99) {
-                    nrEmFalta ++;
-                    nrEmFaltaNaLinha ++;
-                }
-            }
-            if(nrEmFaltaNaLinha == 0) {                
-                if(linhas[lin] == 0) {                   
-                    System.out.println("\nA linha " + (lin + 1) + " foi concluída!\n");
-                    linhas[lin] = 1;
-                }    
-            }     
-        }
-        if(nrEmFalta == 0) {
-            return true;
-        } return false;
-        
-    }
-     
-    /** 
-     * Convert the answer to a Boolean
-     * <p>
-     * The data entered by the user can be summed up in a positive or negative answer,
-     * this method allows this conversion.
-     * @param resposta a string to interpret the positive answer
-     * @return Boolean translation of the answer to positive or negative
-     * @since 1.2
-     */
-    public String restartGame(String resposta) {
-        if(resposta.equals("sim") || resposta.equals("Sim")|| resposta.equals("S") || resposta.equals("s")){
-            return "sim";
-        } else if(resposta.equals("Sair") || resposta.equals("sair")){
-            return "sair";}
-        else if(resposta.equals("nao") || resposta.equals("Nao")|| resposta.equals("N") || resposta.equals("n")){
-            return "nao";}
-        else {
-            return "";
-        }
-    }
 }
