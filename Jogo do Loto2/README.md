@@ -1,5 +1,5 @@
 # Diagrama de classes
-![Alt text](imt/JogoLotoClasses.png?raw=true "Diagrama de Classes")
+<img src="img/JogoLotoClasses.png">
 
 # Codificar o código
 ```
