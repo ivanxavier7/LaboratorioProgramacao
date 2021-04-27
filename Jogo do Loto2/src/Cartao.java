@@ -2,7 +2,26 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Cartao {
-        /**
+    private int[][] cartao = new int[3][9];
+    private int[][] cartaoOriginal = new int[3][9];
+
+    public int[][] getCartao() {
+        return cartao;
+    }
+
+    public void setCartao(int[][] cartao) {
+        this.cartao = cartao;
+    }
+
+    public int[][] getCartaoOriginal() {
+        return cartaoOriginal;
+    }
+
+    public void setCartaoOriginal(int[][] cartaoOriginal) {
+        this.cartaoOriginal = cartaoOriginal;
+    }
+
+    /**
      * Generates the lotto card
      * <p>
      * The numbers generated at random are organized in intervals and columns,
@@ -16,7 +35,6 @@ public class Cartao {
      * @since 1.0
      */
     public int[][] generateCartao() {
-        int[][] cartao = new int[3][9];
         for (int lin=0; lin<3; lin++) {
             int min = 1;
             if (min == 0) {
