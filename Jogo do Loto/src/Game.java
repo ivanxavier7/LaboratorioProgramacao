@@ -160,18 +160,32 @@ public class Game {
         try {
             boolean nrChosen = false;
             boolean nrExist = false;
-            if (nrEscolhido > 0 && nrEscolhido < 91) {
+            int nrEscolhido1 = 0;
+            int col = 0;
+            if(nrEscolhido > 0 && nrEscolhido < 90){
+                nrEscolhido1 = nrEscolhido/10;
+            }
+            else if(nrEscolhido == 90){
+                nrEscolhido1 = 8;
+            }
+             if (nrEscolhido > 0 && nrEscolhido < 91) {
                 for (int lin=0; lin<3; lin++) {
-                    for (int col=0; col<9; col++) {
-                        if (nrEscolhido == cartao[lin][col]) {
-                            cartao[lin][col] = 0 - cartao[lin][col];
-                            nrExist = true;
+                   col = nrEscolhido1;
+                   if(nrEscolhido == 90){
+                       col=8;
+                       ;
+                   }
+                   
+                    if (nrEscolhido == cartao[lin][col]) {
+                        cartao[lin][col] = 0 - cartao[lin][col];
+                        nrExist = true;
 
-                        } else if(nrEscolhido == -cartao[lin][col]){
-                            nrChosen = true;
-                        }
+                    } else if(nrEscolhido == -cartao[lin][col]){
+                      nrChosen = true;
                     }
                 }
+            
+     
                 if (nrChosen == true) {  
                     System.out.println("Este número já foi escolhido!");
                 } else if (nrExist == false) {  
