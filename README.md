@@ -5,7 +5,7 @@ Simão Silva - 102914
 ```
 # Monitor
 ```
-<img src="img/monitor.png">ze
+<img src="img/monitor.png">
 ```
 # Encoding
 ```
