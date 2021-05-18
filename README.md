@@ -4,9 +4,8 @@ Ivan Xavier - 92441
 Simão Silva - 102914
 ```
 # Monitor
-```
-<img src="img/monitor.png">ze
-```
+<img src="img/monitor.png">
+
 # Encoding
 ```
 javac -encoding UTF8 src/*
