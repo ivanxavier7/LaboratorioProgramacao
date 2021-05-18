@@ -41,12 +41,20 @@ public class Cartao {
                 min = min + 1;
             }
             for (int col=0; col<9; col++) {
+                if(col == 0){
                 int nrRandom = (int) (Math.random() * 9) + min;
                 cartao[lin][col] = nrRandom;
+                }else if(col > 0 && col < 8){
+                    int nrRandom = (int) (Math.random() * 10) + min;
+                cartao[lin][col] = nrRandom;
+                }else if(col == 8){
+                    int nrRandom = (int) (Math.random() * 11) + min;
+                cartao[lin][col] = nrRandom;
+                }
                 if (col == 0) {
                     min += 9;
                 } else if (col == 7) {
-                    min += 12;
+                    min += 10;
                 } else {
                     min += 10;
                 }
@@ -103,8 +111,8 @@ public class Cartao {
     private void setWhiteSpaces(int [][] cartao) {
         int[] posicoes;
         for (int lin=0; lin<3; lin++){
-            posicoes = new Random().ints(0, 9).distinct().limit(4).toArray();
-            for (int j=0; j<4; j++) {
+            posicoes = new Random().ints(0, 9).distinct().limit(0).toArray();
+            for (int j=0; j<0; j++) {
                 cartao[lin][posicoes[j]] = 99;  
             }
         }

@@ -34,12 +34,20 @@ public class Game {
                 min = min + 1;
             }
             for (int col=0; col<9; col++) {
+                if(col == 0){
                 int nrRandom = (int) (Math.random() * 9) + min;
                 cartao[lin][col] = nrRandom;
+                }else if(col > 0 && col < 8){
+                    int nrRandom = (int) (Math.random() * 10) + min;
+                cartao[lin][col] = nrRandom;
+                }else if(col == 8){
+                    int nrRandom = (int) (Math.random() * 11) + min;
+                cartao[lin][col] = nrRandom;
+                }
                 if (col == 0) {
                     min += 9;
                 } else if (col == 7) {
-                    min += 12;
+                    min += 10;
                 } else {
                     min += 10;
                 }
@@ -160,16 +168,27 @@ public class Game {
         try {
             boolean nrChosen = false;
             boolean nrExist = false;
+            int col=0;
+            int nrEscolhido1 = 0;
+            if(nrEscolhido > 0 && nrEscolhido < 90){
+                nrEscolhido1 = nrEscolhido/10;
+            }
+            else if(nrEscolhido == 90){
+                nrEscolhido1 = 8;
+            }
             if (nrEscolhido > 0 && nrEscolhido < 91) {
                 for (int lin=0; lin<3; lin++) {
-                    for (int col=0; col<9; col++) {
-                        if (nrEscolhido == cartao[lin][col]) {
-                            cartao[lin][col] = 0 - cartao[lin][col];
-                            nrExist = true;
+                   col = nrEscolhido1;
+                   if(nrEscolhido == 90){
+                       col=8;
+                   }
+                   
+                    if (nrEscolhido == cartao[lin][col]) {
+                        cartao[lin][col] = 0 - cartao[lin][col];
+                        nrExist = true;
 
-                        } else if(nrEscolhido == -cartao[lin][col]){
-                            nrChosen = true;
-                        }
+                    } else if(nrEscolhido == -cartao[lin][col]){
+                      nrChosen = true;
                     }
                 }
                 if (nrChosen == true) {  

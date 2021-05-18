@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Launch Jogo",
+            "request": "launch",
+            "mainClass": "application.Jogo",
+            "projectName": "JogoLoto_Monitor"
+        },
+        {
+            "type": "java",
             "name": "Launch Program",
             "request": "launch",
             "mainClass": "application.Program",
