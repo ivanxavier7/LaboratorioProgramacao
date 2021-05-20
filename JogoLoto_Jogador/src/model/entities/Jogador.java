@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 public class Jogador {
     private int[] linhas = new int[3];
 
-    public int[][] generateCartao(GridPane grid, TextField textField) {
+    public int[][] generateCartao() {
         int[][] cartao = new int[3][9];
         for (int lin=0; lin<3; lin++) {
             int min = 1;
@@ -21,8 +21,8 @@ public class Jogador {
             for (int col=0; col<9; col++) {
                 int nrRandom = (int) (Math.random() * 9) + min;
                 cartao[lin][col] = nrRandom;
-                textField.setText(String.valueOf(nrRandom));
-                grid.add(textField, col, lin);
+                //textField.setText(String.valueOf(nrRandom));
+                //grid.add(textField, col, lin);
                 if (col == 0) {
                     min += 9;
                 } else if (col == 7) {

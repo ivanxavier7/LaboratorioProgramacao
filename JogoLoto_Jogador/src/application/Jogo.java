@@ -32,21 +32,23 @@ public class Jogo extends Application {
     private GridPane grid;
     private Label title = getLabel("Jogador de Loto");
     private Label logger = new Label();
-    private Button playerButton = new Button("Confirmar");
+    private Button playerButton = new Button("Gerar");
     private TextField textField = new TextField();
     private boolean dragFlag = false;
     private int clickCounter = 0;
     private static int[][] cartao = new int[3][9];
+    private static int[][] cartaoAntigo = new int[3][9];
+    private Jogador jogador = new Jogador();
 
     @Override
     public void start(Stage primaryStage) {
     	value.set("");
         grid = createGrid();
         logger.setId("logger");
-        
-        Button clearButton = createButton("Reiniciar Jogo");
+        Button clearButton = createButton("Cartão Original");
         clearButton.setId("resetbutton");
-        clearButton.setOnAction(event -> restartGame(primaryStage));
+        //clearButton.setOnAction(event -> restartGame(primaryStage));
+        clearButton.setOnAction(event -> previousGrid());
 
         TextArea displayField = createDisplayField();
         TextField textField = createPlayersField();
@@ -63,7 +65,7 @@ public class Jogo extends Application {
         bottomBar.getChildren().addAll(
         		getLabel("Número de Jogadores"),
         		textField,
-        		playerButton(),
+        		generateCardButton(),
         		clearButton,
         		logger
         		);
@@ -78,9 +80,11 @@ public class Jogo extends Application {
         scene.getStylesheets().add("application/application.css");
         
         //TEST ZONE
-        //readGrid();
+        readGrid();
         //writeGrid();
+        
         updateGrid();
+        jogador.getClone(cartaoAntigo, cartao);
         
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
@@ -117,6 +121,34 @@ public class Jogo extends Application {
                             
                         } else if (e.getClickCount() > 1) {
                         	System.out.println("DUPLO CLIQUE!" + textFieldNumber);
+                        	readGrid();
+                        }
+                    }
+                    dragFlag = false;
+                }
+            }
+        });
+		return textField;
+     }
+    
+    private TextField createNumberTextField(String number) {
+		TextField textField = createTextField(number);
+		//textField.setOnAction(new NumberButtonHandler(number));
+        textField.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+            	int textFieldNumber = 0;
+            	if(!((TextField)e.getSource()).getText().equals("")) {
+            		textFieldNumber = Integer.parseInt(((TextField)e.getSource()).getText());
+            	}
+                if (e.getButton().equals(MouseButton.PRIMARY)) {
+                    if (!dragFlag) {
+                        System.out.println(++clickCounter + " " + e.getClickCount());
+                        if (e.getClickCount() == 1) {
+                            System.out.println("TESTE" + textFieldNumber);
+                            
+                        } else if (e.getClickCount() > 1) {
+                        	System.out.println("DUPLO CLIQUE!" + textFieldNumber);
                         }
                     }
                     dragFlag = false;
@@ -137,7 +169,6 @@ public class Jogo extends Application {
     }
     
     private void writeGrid() {
-    	Jogador jogador = new Jogador();
     	System.out.println("\nCartão recebido:" + jogador.getStringCartao(cartao));
     	for (Node node : grid.getChildren()) {
     	    System.out.println("Id: " + node.getId());
@@ -180,6 +211,17 @@ public class Jogo extends Application {
     	return playerButton;
     }
     
+    private Button generateCardButton() {
+        playerButton.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+        GridPane.setFillHeight(playerButton, true);
+        GridPane.setFillWidth(playerButton, true);
+        GridPane.setHgrow(playerButton, Priority.ALWAYS);
+        GridPane.setVgrow(playerButton, Priority.ALWAYS);
+        playerButton.setOnAction(event -> updateGrid());
+        playerButton.setId("generatebutton");
+    	return playerButton;
+    }
+    
     public void gamePlayers(ActionEvent event) {
     	if(!textField.getText().equals("")) {
 	    	//monitor.writeJogadoresJSON(Integer.parseInt(textField.getText()));
@@ -206,19 +248,40 @@ public class Jogo extends Application {
     }
     
     private GridPane updateGrid() {
-    	
-        int buttonNr = 1;
+    	cartao = jogador.generateCartao();
         for (int c=1; c<=9; c++) {
         	for (int r=1; r<=3; r++) {
-        		//Button button = createNumberButton(buttonNr);
-        		TextField textField = createNumberTextField(11);
-        		grid.add(textField, c, r);
-        		buttonNr ++;
+        		if(cartao[r-1][c-1]!=99) {
+	        		TextField textField = createNumberTextField(cartao[r-1][c-1]);
+	        		grid.add(textField, c, r);
+        		}
+        		else {
+        			TextField textField = createNumberTextField("");
+            		grid.add(textField, c, r);
+        		}
         	}
         }
         return grid;
     }
-
+    
+    private GridPane previousGrid() {
+    	jogador.getClone(cartao, cartaoAntigo);
+        for (int c=1; c<=9; c++) {
+        	for (int r=1; r<=3; r++) {
+        		String nrCartao = String.valueOf(cartao[r-1][c-1]);
+        		if(cartao[r-1][c-1]!=99) {
+	        		TextField textField = createNumberTextField(cartao[r-1][c-1]);
+	        		grid.add(textField, c, r);
+        		}
+        		else {
+        			TextField textField = createNumberTextField("");
+            		grid.add(textField, c, r);
+        		}
+        	}
+        }
+        return grid;
+    }
+    
     private TextArea createDisplayField() {
         TextArea displayField = new TextArea();
         displayField.textProperty().bind(Bindings.format("%s", value));
