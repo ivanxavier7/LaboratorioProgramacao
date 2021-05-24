@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -33,6 +34,7 @@ public class Jogo extends Application {
     private Label title = getLabel("Jogador de Loto");
     private Label logger = new Label();
     private Button playerButton = new Button("Gerar");
+    private Button cardConfirmButton = new Button("Confirmar Cartão");
     private TextField textField = new TextField();
     private boolean dragFlag = false;
     private int clickCounter = 0;
@@ -67,6 +69,7 @@ public class Jogo extends Application {
         		textField,
         		generateCardButton(),
         		clearButton,
+        		confirmCardButton(),
         		logger
         		);
         
@@ -80,10 +83,11 @@ public class Jogo extends Application {
         scene.getStylesheets().add("application/application.css");
         
         //TEST ZONE
-        readGrid();
-        //writeGrid();
-        
+        //writeGrid();        
         updateGrid();
+        //validateGrid();
+        
+        System.out.println("ASDASDASDASDASDASDASD-------------" + ((TextField)getNodeByRowColumnIndex(1,1,grid)).getText());
         jogador.getClone(cartaoAntigo, cartao);
         
         primaryStage.setScene(scene);
@@ -99,8 +103,7 @@ public class Jogo extends Application {
         return label;
     }
     
-    private void restartGame(Stage stage) {
-    	
+    private void restartGame(Stage stage) {  	
     	value.set("");
     	changeMessage("Reiniciou com sucesso");
     	start(stage);
@@ -113,15 +116,19 @@ public class Jogo extends Application {
             @Override
             public void handle(MouseEvent e) {
             	int textFieldNumber = Integer.parseInt(((TextField)e.getSource()).getText());
+                Node source = (Node)e.getSource() ;
+                Integer colIndex = GridPane.getColumnIndex(source);
+                Integer rowIndex = GridPane.getRowIndex(source);
                 if (e.getButton().equals(MouseButton.PRIMARY)) {
                     if (!dragFlag) {
                         System.out.println(++clickCounter + " " + e.getClickCount());
                         if (e.getClickCount() == 1) {
                             System.out.println("TESTE" + textFieldNumber);
-                            
+                            System.out.println("Coluna - " + colIndex);
+                            System.out.println("Linha - " + rowIndex);
                         } else if (e.getClickCount() > 1) {
                         	System.out.println("DUPLO CLIQUE!" + textFieldNumber);
-                        	readGrid();
+                        	//readGrid();
                         }
                     }
                     dragFlag = false;
@@ -158,14 +165,75 @@ public class Jogo extends Application {
 		return textField;
      }
     
-    private void readGrid() {
+    private Boolean validateGrid() {
+		Boolean valid = true;
     	for (Node node : grid.getChildren()) {
-    	    System.out.println("Id: " + node.getId());
+		    Integer colIndex = GridPane.getColumnIndex(node);
+		    Integer rowIndex = GridPane.getRowIndex(node);
     	    if (node instanceof TextField) {
-    	        // clear
-    	        System.out.println(((TextField)node).getText());
+    	    	if(!((TextField)node).getText().equals("")) {
+	    	    	int textFieldNr = Integer.parseInt(((TextField)node).getText());
+	    	    	System.out.println("AI O CARALHO" +  textFieldNr);
+	    	        switch (colIndex) {
+	    	        case 1:
+	    	        	if(textFieldNr < 1 || textFieldNr > 9) {
+	    	        		changeMessage(String.format("O valor: %d na %dª coluna e na %dª linha é inválido!", textFieldNr, colIndex, rowIndex));
+	    	        		valid = false;
+	    	        	}
+	    	          break;
+	    	        case 2:
+	    	        	if(textFieldNr < 10 || textFieldNr > 19) {
+	    	        		changeMessage(String.format("O valor: %d na %dª coluna e na %dª linha é inválido!", textFieldNr, colIndex, rowIndex));
+	    	        		valid = false;
+	    	        	}
+	    	          break;
+	    	        case 3:
+	    	        	if(textFieldNr < 20 || textFieldNr > 29) {
+	    	        		changeMessage(String.format("O valor: %d na %dª coluna e na %dª linha é inválido!", textFieldNr, colIndex, rowIndex));
+	    	        		valid = false;
+	    	        	}
+	    	          break;
+	    	        case 4:
+	    	        	if(textFieldNr < 30 || textFieldNr > 39) {
+	    	        		changeMessage(String.format("O valor: %d na %dª coluna e na %dª linha é inválido!", textFieldNr, colIndex, rowIndex));
+	    	        		valid = false;
+	    	        	}
+	    	          break;
+	    	        case 5:
+	    	        	if(textFieldNr < 40 || textFieldNr > 49) {
+	    	        		changeMessage(String.format("O valor: %d na %dª coluna e na %dª linha é inválido!", textFieldNr, colIndex, rowIndex));
+	    	        		valid = false;
+	    	        	}
+	    	          break;
+	    	        case 6:
+	    	        	if(textFieldNr < 50 || textFieldNr > 59) {
+	    	        		changeMessage(String.format("O valor: %d na %dª coluna e na %dª linha é inválido!", textFieldNr, colIndex, rowIndex));
+	    	        		valid = false;
+	    	        	}
+	    	          break;
+	    	        case 7:
+	    	        	if(textFieldNr < 60 || textFieldNr > 69) {
+	    	        		changeMessage(String.format("O valor: %d na %dª coluna e na %dª linha é inválido!", textFieldNr, colIndex, rowIndex));
+	    	        		valid = false;
+	    	        	}
+	    	          break;
+	    	        case 8:
+	    	        	if(textFieldNr < 70 || textFieldNr > 79) {
+	    	        		changeMessage(String.format("O valor: %d na %dª coluna e na %dª linha é inválido!", textFieldNr, colIndex, rowIndex));
+	    	        		valid = false;
+	    	        	}
+	    	          break;
+	    	        case 9:
+	    	        	if(textFieldNr < 80 || textFieldNr > 90) {
+	    	        		changeMessage(String.format("O valor: %d na %dª coluna e na %dª linha é inválido!", textFieldNr, colIndex, rowIndex));
+	    	        		valid = false;
+	    	        	}
+	    	          break;
+	    	      }
+	    	    }
     	    }
     	}
+    	return valid;
     }
     
     private void writeGrid() {
@@ -207,7 +275,7 @@ public class Jogo extends Application {
         GridPane.setHgrow(playerButton, Priority.ALWAYS);
         GridPane.setVgrow(playerButton, Priority.ALWAYS);
         playerButton.setOnAction(this::gamePlayers);
-        playerButton.setId("confirmbutton");
+        playerButton.setId("confirmPlayerbutton");
     	return playerButton;
     }
     
@@ -220,6 +288,17 @@ public class Jogo extends Application {
         playerButton.setOnAction(event -> updateGrid());
         playerButton.setId("generatebutton");
     	return playerButton;
+    }
+    
+    private Button confirmCardButton() {
+    	cardConfirmButton.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+        GridPane.setFillHeight(playerButton, true);
+        GridPane.setFillWidth(playerButton, true);
+        GridPane.setHgrow(playerButton, Priority.ALWAYS);
+        GridPane.setVgrow(playerButton, Priority.ALWAYS);
+        cardConfirmButton.setOnAction(event -> validateGrid());
+        cardConfirmButton.setId("confirmbutton");
+    	return cardConfirmButton;
     }
     
     public void gamePlayers(ActionEvent event) {
@@ -264,6 +343,20 @@ public class Jogo extends Application {
         return grid;
     }
     
+    public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+                result = node;
+                System.out.println("TESTE DO CRL" + ((TextField)node).getText());
+                break;
+            }
+        }
+        return result;
+    }
+    
     private GridPane previousGrid() {
     	jogador.getClone(cartao, cartaoAntigo);
         for (int c=1; c<=9; c++) {
@@ -271,10 +364,14 @@ public class Jogo extends Application {
         		String nrCartao = String.valueOf(cartao[r-1][c-1]);
         		if(cartao[r-1][c-1]!=99) {
 	        		TextField textField = createNumberTextField(cartao[r-1][c-1]);
+	        		Constraints.setTextFieldInteger(textField);
+	        		Constraints.setTextFieldMaxLength(textField, 2);
 	        		grid.add(textField, c, r);
         		}
         		else {
         			TextField textField = createNumberTextField("");
+	        		Constraints.setTextFieldInteger(textField);
+	        		Constraints.setTextFieldMaxLength(textField, 2);
             		grid.add(textField, c, r);
         		}
         	}

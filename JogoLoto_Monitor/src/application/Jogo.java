@@ -112,6 +112,7 @@ public class Jogo extends Application {
     }
     
     private void restartGame(Stage stage) {
+    	
     	value.set("");
     	changeMessage("Reiniciou com sucesso");
     	monitor.reset();

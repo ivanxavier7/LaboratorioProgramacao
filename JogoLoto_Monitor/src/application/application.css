@@ -49,11 +49,13 @@
 #confirmbutton {
 	-fx-font-size: 14px;
 	-fx-padding: 2 4 2 4;
+	-fx-text-fill: linear-gradient(cyan, #d0d0d0);
 }
 
 #resetbutton {
 	-fx-font-size: 14px;
 	-fx-padding: 2 4 2 4;
+	-fx-text-fill: linear-gradient(magenta, #d0d0d0);
 }
 
 #logger {
