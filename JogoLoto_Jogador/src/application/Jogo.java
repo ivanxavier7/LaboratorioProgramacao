@@ -79,7 +79,7 @@ public class Jogo extends Application {
         root.setTop(topBar);
         root.setCenter(grid);  
         root.setBottom(bottomBar);
-        Scene scene = new Scene(root, 800, 400);
+        Scene scene = new Scene(root, 1000, 400);
         scene.getStylesheets().add("application/application.css");
         
         //TEST ZONE
@@ -87,7 +87,6 @@ public class Jogo extends Application {
         updateGrid();
         //validateGrid();
         
-        System.out.println("ASDASDASDASDASDASDASD-------------" + ((TextField)getNodeByRowColumnIndex(1,1,grid)).getText());
         jogador.getClone(cartaoAntigo, cartao);
         
         primaryStage.setScene(scene);
@@ -167,6 +166,7 @@ public class Jogo extends Application {
     
     private Boolean validateGrid() {
 		Boolean valid = true;
+		changeMessage("");
     	for (Node node : grid.getChildren()) {
 		    Integer colIndex = GridPane.getColumnIndex(node);
 		    Integer rowIndex = GridPane.getRowIndex(node);
@@ -314,15 +314,6 @@ public class Jogo extends Application {
         grid.setHgap(5);
         grid.setVgap(5);
         grid.setPadding(new Insets(10));
-        int buttonNr = 1;
-        for (int c=1; c<=9; c++) {
-        	for (int r=1; r<=3; r++) {
-        		//Button button = createNumberButton(buttonNr);
-        		TextField textField = createNumberTextField(buttonNr);
-        		grid.add(textField, c, r);
-        		buttonNr ++;
-        	}
-        }
         return grid;
     }
     
@@ -350,7 +341,7 @@ public class Jogo extends Application {
         for (Node node : childrens) {
             if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
                 result = node;
-                System.out.println("TESTE DO CRL" + ((TextField)node).getText());
+                System.out.println("TESTE DO " + ((TextField)node).getText());
                 break;
             }
         }

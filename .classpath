@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Ficha_1/Exercicio1/src"/>
+	<classpathentry kind="src" path="Ficha_1/Exercicio2/src"/>
+	<classpathentry kind="src" path="Ficha_1/Exercicio3/src"/>
+	<classpathentry kind="src" path="Ficha_1/Exercicio4/src"/>
+	<classpathentry kind="src" path="JavaFX_Base/src"/>
+	<classpathentry kind="src" path="Jogo do Loto/src"/>
+	<classpathentry kind="src" path="Jogo do Loto2/src"/>
+	<classpathentry kind="src" path="JogoLoto_Jogador/src"/>
+	<classpathentry kind="src" path="JogoLoto_Monitor/src"/>
+	<classpathentry kind="output" path="JavaFX_Base/bin"/>
+</classpath>
