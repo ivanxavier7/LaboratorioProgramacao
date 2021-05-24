@@ -19,14 +19,22 @@ public class Jogador {
                 min = min + 1;
             }
             for (int col=0; col<9; col++) {
+            	if(col == 0) {
                 int nrRandom = (int) (Math.random() * 9) + min;
                 cartao[lin][col] = nrRandom;
+                } else if(col> 0 && col<8){
+                	int nrRandom = (int) (Math.random() * 10) + min;
+                	cartao[lin][col] = nrRandom;
+                } else if(col==8) {
+                	int nrRandom = (int) (Math.random() * 11) + min;
+                	cartao[lin][col] = nrRandom;
+                }
                 //textField.setText(String.valueOf(nrRandom));
                 //grid.add(textField, col, lin);
                 if (col == 0) {
                     min += 9;
                 } else if (col == 7) {
-                    min += 12;
+                    min += 10;
                 } else {
                     min += 10;
                 }

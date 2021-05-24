@@ -173,7 +173,7 @@ public class Jogo extends Application {
     	    if (node instanceof TextField) {
     	    	if(!((TextField)node).getText().equals("")) {
 	    	    	int textFieldNr = Integer.parseInt(((TextField)node).getText());
-	    	    	System.out.println("AI O CARALHO" +  textFieldNr);
+	    	    	System.out.println("error " +  textFieldNr);
 	    	        switch (colIndex) {
 	    	        case 1:
 	    	        	if(textFieldNr < 1 || textFieldNr > 9) {
