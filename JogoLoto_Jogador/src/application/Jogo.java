@@ -15,17 +15,15 @@ import gui.util.Grid;
 public class Jogo extends Application {
     private GridPane grid;
     private Label logger = new Label();
-    private Grid gridUtil = new Grid();
-    private Bars barsUtil = new Bars();
 
     @Override
     public void start(Stage primaryStage) {
         logger.setId("logger");
-        grid = gridUtil.createGrid();
+        grid = Grid.createGrid();
 
         TextArea displayField = Common.createDisplayField();
-        FlowPane topBar = barsUtil.getTopBar(displayField);        
-        FlowPane bottomBar = barsUtil.getBottomBar(grid);
+        FlowPane topBar = Bars.getTopBar(displayField);        
+        FlowPane bottomBar = Bars.getBottomBar(grid);
         BorderPane root = Common.getRoot(topBar, grid, bottomBar);
         Scene scene = Common.getScene(root);
         

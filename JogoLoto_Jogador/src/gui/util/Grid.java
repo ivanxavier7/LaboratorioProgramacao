@@ -11,12 +11,12 @@ import javafx.scene.layout.GridPane;
 import model.entities.Jogador;
 
 public class Grid {
-    private Jogador jogador = new Jogador();
-    private Buttons buttonsUtil = new Buttons();
+    private static Jogador jogador = new Jogador();
+    private static Buttons buttonsUtil = new Buttons();
     private static int[][] cartao = new int[3][9];
     private static int[][] cartaoAntigo = new int[3][9];
     
-    public GridPane createGrid() {
+    public static GridPane createGrid() {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(5);
@@ -27,7 +27,7 @@ public class Grid {
         return grid;
     }
     
-    public GridPane updateGrid(GridPane grid) {
+    public static GridPane updateGrid(GridPane grid) {
     	cartao = jogador.generateCartao();
         for (int c=1; c<=9; c++) {
         	for (int r=1; r<=3; r++) {
@@ -44,7 +44,7 @@ public class Grid {
         return grid;
     }
     
-    public GridPane originalGrid(GridPane grid) {
+    public static GridPane originalGrid(GridPane grid) {
     	jogador.getClone(cartao, cartaoAntigo);
         for (int c=1; c<=9; c++) {
         	for (int r=1; r<=3; r++) {

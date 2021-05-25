@@ -66,16 +66,6 @@ public class Buttons {
     }
     
     
-    private Button playerButton(Button playerButton, TextField textField, Label logger) {
-        playerButton.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-        GridPane.setFillHeight(playerButton, true);
-        GridPane.setFillWidth(playerButton, true);
-        GridPane.setHgrow(playerButton, Priority.ALWAYS);
-        GridPane.setVgrow(playerButton, Priority.ALWAYS);
-        playerButton.setOnAction(event -> gamePlayers(textField, logger));
-        playerButton.setId("confirmPlayerbutton");
-    	return playerButton;
-    }
     public static Button clearButton(GridPane grid) {
 	    Button clearButton = Buttons.createButton("Cartão Original");
 	    clearButton.setId("resetbutton");
@@ -83,7 +73,8 @@ public class Buttons {
 	    return clearButton;
     }
     
-    public static Button generateCardButton(Button playerButton, GridPane grid) {
+    public static Button generateCardButton(GridPane grid) {
+    	Button playerButton = new Button("Gerar");
         playerButton.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
         GridPane.setFillHeight(playerButton, true);
         GridPane.setFillWidth(playerButton, true);
