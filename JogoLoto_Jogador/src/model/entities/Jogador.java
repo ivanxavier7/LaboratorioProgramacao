@@ -20,8 +20,8 @@ public class Jogador {
             }
             for (int col=0; col<9; col++) {
             	if(col == 0) {
-                int nrRandom = (int) (Math.random() * 9) + min;
-                cartao[lin][col] = nrRandom;
+	                int nrRandom = (int) (Math.random() * 9) + min;
+	                cartao[lin][col] = nrRandom;
                 } else if(col> 0 && col<8){
                 	int nrRandom = (int) (Math.random() * 10) + min;
                 	cartao[lin][col] = nrRandom;
