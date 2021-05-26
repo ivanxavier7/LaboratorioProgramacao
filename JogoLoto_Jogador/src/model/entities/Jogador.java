@@ -29,8 +29,6 @@ public class Jogador {
                 	int nrRandom = (int) (Math.random() * 11) + min;
                 	cartao[lin][col] = nrRandom;
                 }
-                //textField.setText(String.valueOf(nrRandom));
-                //grid.add(textField, col, lin);
                 if (col == 0) {
                     min += 9;
                 } else if (col == 7) {

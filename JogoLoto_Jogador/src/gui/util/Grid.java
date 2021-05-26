@@ -69,6 +69,7 @@ public class Grid {
     public Boolean validateGrid(GridPane grid, Label logger) {
 		Boolean valid = true;
 		Controller.changeMessage(logger,"");
+		int whiteSpaces = 0;
     	for (Node node : grid.getChildren()) {
 		    Integer colIndex = GridPane.getColumnIndex(node);
 		    Integer rowIndex = GridPane.getRowIndex(node);
@@ -132,8 +133,17 @@ public class Grid {
 	    	        	}
 	    	          break;
 	    	        }
+	    	    } else {
+	    	    	whiteSpaces ++;
 	    	    }
     	    }
+    	}
+    	if(whiteSpaces - 12 > 0) {
+    		Controller.changeMessage(logger, String.format("Existe(m) %d espaço(s) em branco a menos", whiteSpaces - 12));
+    		valid = false;
+    	} else if(whiteSpaces - 12 < 0) {
+    		Controller.changeMessage(logger, String.format("Existe(m) %d espaço(s) em branco a mais", 12 - whiteSpaces));
+    		valid = false;
     	}
     	return valid;
     }
