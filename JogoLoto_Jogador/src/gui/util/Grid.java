@@ -29,6 +29,7 @@ public class Grid {
     
     public static GridPane updateGrid(GridPane grid) {
     	cartao = jogador.generateCartao();
+    	grid.getChildren().clear();;
         for (int c=1; c<=9; c++) {
         	for (int r=1; r<=3; r++) {
         		if(cartao[r-1][c-1]!=99) {
@@ -130,7 +131,7 @@ public class Grid {
 	    	        		valid = false;
 	    	        	}
 	    	          break;
-	    	      }
+	    	        }
 	    	    }
     	    }
     	}
