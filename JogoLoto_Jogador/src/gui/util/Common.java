@@ -1,8 +1,11 @@
 package gui.util;
 
+import java.util.concurrent.TimeUnit;
+
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -14,6 +17,10 @@ import javafx.scene.layout.GridPane;
 
 public class Common {
     private final static StringProperty value = new SimpleStringProperty();
+	
+    public void setValue(String string) {
+    	value.set(string);
+    }
     
     public static TextArea createDisplayField() {
         TextArea displayField = new TextArea();
@@ -56,5 +63,34 @@ public class Common {
         Scene scene = new Scene(root, 1000, 400);
         scene.getStylesheets().add("application/application.css");
         return scene;
+    }
+    
+    public static Task<Void> getTaskDisplay(TextField displayField) {
+	    Task<Void> task = new Task<Void>() {
+	        @Override public Void call() {
+	            final int max = 8;
+	            for (int i=1; i<=max; i++) {
+	                if (isCancelled()) {
+	                   break;
+	                }
+	                updateProgress(i, max);
+	                while(true) {
+	                    try{
+	                    	TimeUnit.SECONDS.sleep(3);
+	                        //value.set(String.valueOf(monitor.readJogadoresJSON()));
+	                    }
+	                    catch(Exception e){
+	                        System.err.println("Erro, Ficheiro não pode ser lido!");
+	                        break;
+	                    }
+	                }
+	            }
+	            return null;
+	            //ProgressBar bar = new ProgressBar();
+	            //bar.progressProperty().bind(task.progressProperty());
+	            //new Thread(task).start();
+	        }
+	    };
+        return task;
     }
 }

@@ -18,7 +18,6 @@ public class Buttons {
 		TextField textField = createTextField(number);
 		Constraints.setTextFieldMaxLength(textField, 2);
 		Constraints.setTextFieldInteger(textField);
-		//textField.setOnAction(new NumberButtonHandler(number));
         textField.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
