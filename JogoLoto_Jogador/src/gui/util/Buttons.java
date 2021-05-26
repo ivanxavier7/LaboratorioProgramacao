@@ -12,7 +12,6 @@ import javafx.scene.layout.Priority;
 public class Buttons {
     private boolean dragFlag = false;
     private int clickCounter = 0;
-    private static Grid gridUtil = new Grid();
 
     
     public TextField createNumberTextField(String number) {
@@ -65,11 +64,10 @@ public class Buttons {
         return button ;
     }
     
-    
     public static Button clearButton(GridPane grid) {
 	    Button clearButton = Buttons.createButton("Cartão Original");
 	    clearButton.setId("resetbutton");
-	    clearButton.setOnAction(event -> gridUtil.originalGrid(grid));
+	    clearButton.setOnAction(event -> Grid.originalGrid(grid));
 	    return clearButton;
     }
     
@@ -80,7 +78,7 @@ public class Buttons {
         GridPane.setFillWidth(playerButton, true);
         GridPane.setHgrow(playerButton, Priority.ALWAYS);
         GridPane.setVgrow(playerButton, Priority.ALWAYS);
-        playerButton.setOnAction(event -> gridUtil.updateGrid(grid));
+        playerButton.setOnAction(event -> Grid.updateGrid(grid));
         playerButton.setId("generatebutton");
     	return playerButton;
     }
@@ -91,7 +89,7 @@ public class Buttons {
         GridPane.setFillWidth(cardConfirmButton, true);
         GridPane.setHgrow(cardConfirmButton, Priority.ALWAYS);
         GridPane.setVgrow(cardConfirmButton, Priority.ALWAYS);
-        cardConfirmButton.setOnAction(event -> gridUtil.validateGrid(grid, logger));
+        cardConfirmButton.setOnAction(event -> Grid.lockGrid(grid, logger));
         cardConfirmButton.setId("confirmbutton");
     	return cardConfirmButton;
     }

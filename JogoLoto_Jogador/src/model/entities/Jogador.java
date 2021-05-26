@@ -121,18 +121,14 @@ public class Jogador {
                    if(nrEscolhido == 90){
                        col=8;
                        ;
+                   }                   
+                   if (nrEscolhido == cartao[lin][col]) {
+                       cartao[lin][col] = 0 - cartao[lin][col];
+                       nrExist = true;
+                   } else if(nrEscolhido == -cartao[lin][col]){
+                     nrChosen = true;
                    }
-                   
-                    if (nrEscolhido == cartao[lin][col]) {
-                        cartao[lin][col] = 0 - cartao[lin][col];
-                        nrExist = true;
-
-                    } else if(nrEscolhido == -cartao[lin][col]){
-                      nrChosen = true;
-                    }
                 }
-            
-     
                 if (nrChosen == true) {  
                     System.out.println("Este número já foi escolhido!");
                 } else if (nrExist == false) {  
@@ -173,8 +169,7 @@ public class Jogador {
         }
         if(nrEmFalta == 0) {
             return true;
-        } return false;
-        
+        } return false;    
     }
      
     public String restartGame(String resposta) {

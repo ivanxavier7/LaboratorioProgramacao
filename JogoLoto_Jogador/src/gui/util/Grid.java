@@ -66,7 +66,7 @@ public class Grid {
         return grid;
     }
     
-    public Boolean validateGrid(GridPane grid, Label logger) {
+    public static Boolean validateGrid(GridPane grid, Label logger) {
 		Boolean valid = true;
 		Controller.changeMessage(logger,"");
 		int whiteSpaces = 0;
@@ -157,5 +157,17 @@ public class Grid {
     	    	((TextField)node).setText("TESTE");
     	    }
     	}
+    }
+    
+    public static void lockGrid(GridPane grid, Label logger) {
+    	if(validateGrid(grid, logger)) {
+        	for (Node node : grid.getChildren()) {
+        	    if (node instanceof TextField) {
+        	    	((TextField)node).setEditable(false);;
+        	    }
+        	}
+        	Controller.changeMessage(logger, "Cartão confirmado com sucesso!");
+    	}
+
     }
 }
