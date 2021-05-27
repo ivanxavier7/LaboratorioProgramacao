@@ -7,6 +7,8 @@ import java.io.Reader;
 
 import org.json.JSONArray;
 
+import json.ConfigJSON;
+
 public class MonitorLoto {
     private JSONArray nrSorteado = new JSONArray();
     private FileWriter file;
@@ -24,7 +26,7 @@ public class MonitorLoto {
     private void writeJSON(JSONArray jsArray) {
         try { 
             // Constructs a FileWriter given a file name, using the platform's default charset
-            file = new FileWriter("src/json/monitor.json");
+            file = new FileWriter(ConfigJSON.getPathMonitor());
             file.write(jsArray.toString());
  
         } catch (IOException e) {
@@ -45,7 +47,7 @@ public class MonitorLoto {
     
     public void readJSON() {	
         try {
-        	Reader reader = new FileReader("src/json/monitor.json");
+        	Reader reader = new FileReader(ConfigJSON.getPathMonitor());
             int data = reader.read();  
             while (data != -1) {  
                 System.out.print((char) data);  
@@ -60,7 +62,7 @@ public class MonitorLoto {
     private void resetJSON(JSONArray jsArray) {
         try { 
             // Constructs a FileWriter given a file name, using the platform's default charset
-            file = new FileWriter("src/json/monitor.json");
+            file = new FileWriter(ConfigJSON.getPathMonitor());
             file.write("");
  
         } catch (IOException e) {
@@ -82,7 +84,7 @@ public class MonitorLoto {
     public void writeJogadoresJSON(int nrJogadores) {
         try { 
             // Constructs a FileWriter given a file name, using the platform's default charset
-            file = new FileWriter("src/json/nrjogadores.json");
+            file = new FileWriter(ConfigJSON.getPathPlayers());
             file.write(String.valueOf(nrJogadores));
  
         } catch (IOException e) {
@@ -103,7 +105,7 @@ public class MonitorLoto {
     
     public void readJogadoresJSON() {	
         try {
-        	Reader reader = new FileReader("src/json/nrjogadores.json");
+        	Reader reader = new FileReader(ConfigJSON.getPathPlayers());
             int data = reader.read();  
             while (data != -1) {  
                 System.out.print((char) data);  

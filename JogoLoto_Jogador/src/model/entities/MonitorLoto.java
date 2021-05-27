@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 import org.json.JSONArray;
 
+import json.ConfigJSON;
+
 public class MonitorLoto {
     private JSONArray nrSorteado = new JSONArray();
     private FileWriter file;
@@ -27,7 +29,7 @@ public class MonitorLoto {
     private void writeJSON(JSONArray jsArray) {
         try { 
             // Constructs a FileWriter given a file name, using the platform's default charset
-            file = new FileWriter("/JogoLoto_Monitor_Handler/src/json/monitor.json");
+            file = new FileWriter(ConfigJSON.getPathMonitor());
             file.write(jsArray.toString());
  
         } catch (IOException e) {
@@ -49,11 +51,7 @@ public class MonitorLoto {
     public String readJSON() {
     	String data = null;
         try {
-        	String filePath = new File("").getAbsolutePath();
-            String path = new File( File.separator +".." +File.separator +"JogoLoto_Monitor_Handler/src/json/monitor.json")
-                    .getAbsolutePath();
-System.out.println(path);
-            File myObj = new File("JogoLoto_Monitor_Handler/src/json/monitor.json");
+            File myObj = new File(ConfigJSON.getPathMonitor());
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
               data = myReader.nextLine();
@@ -67,10 +65,10 @@ System.out.println(path);
         return data;
     }
     
-    private void resetJSON(JSONArray jsArray) {
+    private void resetJSON() {
         try { 
             // Constructs a FileWriter given a file name, using the platform's default charset
-            file = new FileWriter("/JogoLoto_Monitor_Handler/src/json/monitor.json");
+            file = new FileWriter(ConfigJSON.getPathMonitor());
             file.write("");
  
         } catch (IOException e) {
@@ -92,7 +90,7 @@ System.out.println(path);
     public void writeJogadoresJSON(int nrJogadores) {
         try { 
             // Constructs a FileWriter given a file name, using the platform's default charset
-            file = new FileWriter("/JogoLoto_Monitor_Handler/src/json/nrjogadores.json");
+            file = new FileWriter(ConfigJSON.getPathPlayers());
             file.write(String.valueOf(nrJogadores));
  
         } catch (IOException e) {
@@ -113,7 +111,7 @@ System.out.println(path);
     
     public void readJogadoresJSON() {	
         try {
-        	Reader reader = new FileReader("/JogoLoto_Monitor_Handler/src/json/nrjogadores.json");
+        	Reader reader = new FileReader(ConfigJSON.getPathPlayers());
             int data = reader.read();  
             while (data != -1) {  
                 System.out.print((char) data);  
@@ -130,6 +128,6 @@ System.out.println(path);
     }
     
     public void reset() {
-    	resetJSON(nrSorteado);
+    	resetJSON();
     }
 }
