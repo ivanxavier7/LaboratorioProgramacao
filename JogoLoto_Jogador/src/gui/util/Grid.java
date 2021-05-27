@@ -1,19 +1,28 @@
 package gui.util;
 
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import model.entities.Jogador;
+import model.entities.MonitorLoto;
 
 public class Grid {
     private static Jogador jogador = new Jogador();
     private static Buttons buttonsUtil = new Buttons();
     private static int[][] cartao = new int[3][9];
     private static int[][] cartaoAntigo = new int[3][9];
+    private static boolean dragFlag = false;
+    private static int clickCounter = 0;
+    private static boolean firstRowComplete = false;
+    private static boolean secondRowComplete = false;
+    private static boolean thirdRowComplete = false;
     
     public static GridPane createGrid() {
         GridPane grid = new GridPane();
@@ -95,7 +104,7 @@ public class Grid {
     	return valid;
     }
     
-    public static Node getItemByIndex (final int row, final int col, GridPane grid) {
+	public static Node getItemByIndex (final int row, final int col, GridPane grid) {
         Node result = null;
         ObservableList<Node> childrens = grid.getChildren();
         for (Node node : childrens) {
@@ -187,16 +196,102 @@ public class Grid {
         }
         return validNr;
     }
-    
+    // Blocks Click Spam
     public static void lockGrid(GridPane grid, Label logger) {
     	if(validateGrid(grid, logger)) {
         	for (Node node : grid.getChildren()) {
         	    if (node instanceof TextField) {
-        	    	((TextField)node).setEditable(false);;
+        	    	((TextField)node).setEditable(false);
+        	    	((TextField)node).setOnMouseClicked(new EventHandler<MouseEvent>() {
+        	                @Override
+        	                public void handle(MouseEvent e) {
+        	                	int textFieldNumber = 0;
+        	                	if(!((TextField)e.getSource()).getText().equals("")) {
+        	                		textFieldNumber = Integer.parseInt(((TextField)e.getSource()).getText());
+        	                	}
+        	                    if (e.getButton().equals(MouseButton.PRIMARY)) {
+        	                        if (!dragFlag) {
+        	                            System.out.println(++clickCounter + " " + e.getClickCount());
+        	                            if (e.getClickCount() == 1) {
+        	                                if(MonitorLoto.checkJSON(textFieldNumber)) {
+        	                                	((TextField)e.getSource()).setText("");;
+        	                                	((TextField)e.getSource()).setStyle(
+        	                                			  "-fx-background-color:"
+        	                                			+ "#b0e0e6,"
+        	                                			+ "linear-gradient(#b0e0e6 0%, #1f2429 20%, #191d22 100%),"
+        	                                			+ "linear-gradient(#20262b, #191d22),"
+        	                                			+ "radial-gradient(center 50% 0%, radius 100%, rgba(100,67,120,0.5), rgba(255,0,255,0));"
+        	                                			+ "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );");
+        	                                };
+        	                                Integer rowIndex = GridPane.getRowIndex(node);
+        	                                Controller.changeMessage(logger, String.format("Selecionou o número %d", textFieldNumber));
+        	                                checkProgress(grid, logger, rowIndex);
+        	                                
+        	                                
+        	                            } else if (e.getClickCount() > 1) {
+        	                                if(MonitorLoto.checkJSON(textFieldNumber)) {
+        	                                	((TextField)e.getSource()).setText("");;
+        	                                	((TextField)e.getSource()).setStyle(
+        	                                			  "-fx-background-color:"
+	        	                                			+ "#b0e0e6,"
+	        	                                			+ "linear-gradient(#b0e0e6 0%, #1f2429 20%, #191d22 100%),"
+	        	                                			+ "linear-gradient(#20262b, #191d22),"
+	        	                                			+ "radial-gradient(center 50% 0%, radius 100%, rgba(100,67,120,0.5), rgba(255,0,255,0));"
+        	                                			+ "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );");
+        	                                };
+        	                                Integer rowIndex = GridPane.getRowIndex(node);
+        	                                Controller.changeMessage(logger, String.format("Selecionou o número %d", textFieldNumber));
+        	                                checkProgress(grid, logger, rowIndex);
+        	                            }
+        	                        }
+        	                        dragFlag = false;
+        	                    }
+        	                }
+        	    	});
         	    }
         	}
         	Controller.changeMessage(logger, "Cartão confirmado com sucesso!");
     	}
-
+    }
+    
+    private static void checkProgress(GridPane grid, Label logger, int rowIndex) {
+    	Boolean lineComplete = true;
+    	for(int col=1; col<10; col++) {
+	        String colNr = ((TextField)getItemByIndex(rowIndex, col, grid)).getText();
+	        if(!colNr.equals("")) {
+	    		System.out.println("Não está completa");
+	        	lineComplete = false;
+	        }
+    	}
+    	if(lineComplete) {
+    		Controller.changeMessage(logger, "Completou uma linha, ganhou <PREMIO> €");
+        	for(int col=1; col<10; col++) {
+    	        ((TextField)getItemByIndex(rowIndex, col, grid)).setStyle(
+          			  "-fx-background-color:"
+	          			  + "linear-gradient("
+	          			  + "from 25% 25% to 100% 100%,"
+	          			  + "#5FFFFF,"
+	          			  + "#8154F7);");
+	        }
+        	switch (rowIndex) {
+            case 1:
+            	firstRowComplete = true;
+            	break;
+            case 2:
+            	secondRowComplete = true;
+            	break;
+            case 3:
+            	thirdRowComplete = true;
+            	break;
+        	}
+        	if(firstRowComplete && secondRowComplete && thirdRowComplete) {
+        		Controller.changeMessage(logger, "Parabéns ganhou o jogo!");
+        		for(int row=1; row<4; row++) {
+                	for(int col=1; col<10; col++) {
+            	        ((TextField)getItemByIndex(row, col, grid)).setVisible(false);
+        	        }
+        		}
+        	}
+    	}
     }
 }

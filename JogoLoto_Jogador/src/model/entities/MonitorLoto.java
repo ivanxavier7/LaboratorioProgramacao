@@ -47,6 +47,40 @@ public class MonitorLoto {
         }
     }
     
+    public static Boolean checkJSON(int textFieldNumber) {
+    	Boolean result = false;
+    	String data = null;
+    	
+        try {
+            File myObj = new File(ConfigJSON.getPathMonitor());
+            Scanner myReader = new Scanner(myObj);
+            
+            while (myReader.hasNextLine()) {
+              data = myReader.nextLine();
+            }
+            myReader.close();
+            
+          } catch (FileNotFoundException e) {
+            System.out.println("Ocorreu um erro ao ler o ficheiro!");
+            e.printStackTrace();
+          }
+        String[] items = data.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("\\s", "").split(",");
+
+        int[] results = new int[items.length];
+
+        for (int i = 0; i < items.length; i++) {
+            try {
+                results[i] = Integer.parseInt(items[i]);
+                if(results[i]==textFieldNumber) {
+                	result = true;
+                }
+                System.out.println(results[i]);
+            } catch (NumberFormatException e) {
+            };
+        }
+        return result;
+    }
+    
     
     public String readJSON() {
     	String data = null;

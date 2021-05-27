@@ -18,6 +18,7 @@ public class Buttons {
 		TextField textField = createTextField(number);
 		Constraints.setTextFieldMaxLength(textField, 2);
 		Constraints.setTextFieldInteger(textField);
+		// Blocks Click Spam
         textField.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
