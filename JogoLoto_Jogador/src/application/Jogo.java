@@ -4,37 +4,36 @@ import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.entities.Jogador;
 import model.entities.MonitorLoto;
 
 import java.util.concurrent.TimeUnit;
 
-import gui.util.Bars;
-import gui.util.Common;
-import gui.util.Grid;
+import gui.components.Bars;
+import gui.components.Grid;
+import gui.util.Controller;
 
 public class Jogo extends Application{
     private GridPane grid;
     private Label logger = new Label();
-    private MonitorLoto monitor = new MonitorLoto();
-    private Common commonUtils = new Common();
-
+    private Jogador jogador = new Jogador();
+    
     @Override
     public void start(Stage primaryStage) {
         logger.setId("logger");
         grid = Grid.createGrid();
 
-        TextArea displayField = Common.createDisplayField();
+        TextArea displayField = Controller.createDisplayField();
         FlowPane topBar = Bars.getTopBar(displayField);        
-        FlowPane bottomBar = Bars.getBottomBar(grid);
-        BorderPane root = Common.getRoot(topBar, grid, bottomBar);
-        Scene scene = Common.getScene(root);
-        // Parte a ser reorganizada
+        FlowPane bottomBar = Bars.getBottomBar(grid, primaryStage, jogador);
+        BorderPane root = Controller.getRoot(topBar, grid, bottomBar);
+        Scene scene = Controller.getScene(root);
+        
         Task<Void> task = new Task<Void>() {
             @Override public Void call() {
             	// Threads Nr
@@ -47,7 +46,7 @@ public class Jogo extends Application{
                     while(true) {
 	                    try{
 	                    	TimeUnit.SECONDS.sleep(3);    	
-	                    	commonUtils.setValue(String.valueOf(monitor.readJSON()));	                    	
+	                    	Controller.setValue(String.valueOf(MonitorLoto.readJSON()));	                    	
 	                    }
 	                    catch(Exception e){
 	                        System.err.println("Erro, Ficheiro não pode ser lido!");
@@ -64,6 +63,7 @@ public class Jogo extends Application{
         primaryStage.setResizable(false);
         primaryStage.show();
     }
+    
     public static void main(String[] args) {
         launch(args);
     }

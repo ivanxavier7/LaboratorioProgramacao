@@ -82,7 +82,7 @@ public class MonitorLoto {
     }
     
     
-    public String readJSON() {
+    public static String readJSON() {
     	String data = null;
         try {
             File myObj = new File(ConfigJSON.getPathMonitor());

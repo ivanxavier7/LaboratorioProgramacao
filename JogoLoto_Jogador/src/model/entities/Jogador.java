@@ -3,15 +3,25 @@ package model.entities;
 import java.util.Arrays;
 import java.util.Random;
 
-import org.json.JSONArray;
 
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import gui.util.Controller;
+import javafx.scene.control.Label;
 
 public class Jogador {
+	
+	private double aposta = 0;
     private int[] linhas = new int[3];
+    
+    public void setAposta(double aposta, Label logger) {
+    	Controller.changeMessage(logger, String.format("Apostou %.2f euros", aposta));
+		this.aposta = aposta;
+	}
+    
+	public double getAposta() {
+		return aposta;
+	}
 
-    public int[][] generateCartao() {
+	public int[][] generateCartao() {
         int[][] cartao = new int[3][9];
         for (int lin=0; lin<3; lin++) {
             int min = 1;
