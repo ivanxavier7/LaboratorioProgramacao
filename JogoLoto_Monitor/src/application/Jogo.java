@@ -20,58 +20,31 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 import model.entities.MonitorLoto;
-
+import gui.components.Buttons;
 import gui.util.Constraints;
+import gui.util.Controller;
+import gui.util.Grid;
 
 public class Jogo extends Application {
 
-    private final StringProperty value = new SimpleStringProperty();
-    private GridPane grid;
-    private MonitorLoto monitor = new MonitorLoto();
-    private Label title = getLabel("Monitor de Loto");
-    private Label logger = new Label();
-    private Button playerButton = new Button("Confirmar");
-    private TextField textField = new TextField();
+    private final static StringProperty value = new SimpleStringProperty();
 
+	private static MonitorLoto monitor = new MonitorLoto();
+    private Label title = Controller.getLabel("Monitor de Loto");
+    private static Label logger = new Label();
 
-    class NumberButtonHandler implements EventHandler<ActionEvent> {
-        private final int number ;
-        NumberButtonHandler(int number) {
-            this.number = number ;
-        }
-        @Override
-        public void handle(ActionEvent event) {
-            value.set(value.get() + "    " + number);
-            int btNumber = Integer.parseInt(((Button)event.getSource()).getText());
-            grid.getChildren().remove((Button)event.getSource());
-            
-            // Saves the chosen number in the JSON file
-            monitor.nrEscolhido(btNumber);
-            changeMessage(String.format("Selecionou o número %s", String.valueOf(number)));
-        }
-
-    }
-
-    @Override
+	@Override
     public void start(Stage primaryStage) {
-    	value.set("");
-        grid = createGrid();
+        GridPane grid = Grid.createGrid();
         logger.setId("logger");
-        int buttonNr = 1;
-        for (int r=1; r<=10; r++) {
-        	for (int c=1; c<=9; c++) {
-        		Button button = createNumberButton(buttonNr);
-        		grid.add(button, r, c);
-        		buttonNr ++;
-        	}
-        }
+        Controller.changeMessage("Iniciou com sucesso");
 
-        Button clearButton = createButton("Reiniciar Jogo");
+        Button clearButton = Buttons.createButton("Reiniciar Jogo");
         clearButton.setId("resetbutton");
-        clearButton.setOnAction(event -> restartGame(primaryStage));
+        clearButton.setOnAction(event -> Controller.restartGame(primaryStage, value, monitor));
 
-        TextArea displayField = createDisplayField();
-        TextField textField = createPlayersField();
+        TextArea displayField = Controller.createDisplayField(value);
+        TextField textField = Controller.createPlayersField();
         
         FlowPane topBar = new FlowPane();
         title.setId("title");
@@ -83,9 +56,9 @@ public class Jogo extends Application {
         bottomBar.setHgap(20);
         bottomBar.setVgap(20);
         bottomBar.getChildren().addAll(
-        		getLabel("Número de Jogadores"),
+        		Controller.getLabel("Número de Jogadores"),
         		textField,
-        		playerButton(),
+        		Buttons.playerButton(textField, monitor),
         		clearButton,
         		logger
         		);
@@ -103,90 +76,21 @@ public class Jogo extends Application {
         primaryStage.show();
     }
     
-    private Label getLabel(String string) {
-        Label label = new Label();
-        label.setText(string);
-        label.setMaxWidth(Double.POSITIVE_INFINITY);
-        label.setMaxHeight(Double.POSITIVE_INFINITY);
-        return label;
-    }
+	public static String getValue() {
+		return value.get();
+	}
+	
+	public static void setValueMonitor(int newNumber) {
+		String oldNumbers = String.valueOf(getValue());
+		if(oldNumbers.equals("null")) {
+			oldNumbers = "";
+		}
+		value.set(oldNumbers + "  " + newNumber);
+	}
     
-    private void restartGame(Stage stage) {
-    	
-    	value.set("");
-    	changeMessage("Reiniciou com sucesso");
-    	monitor.reset();
-    	start(stage);
-    }
-
-     private Button createNumberButton(int number) {
-        Button button = createButton(Integer.toString(number));
-        button.setOnAction(new NumberButtonHandler(number));
-        return button ;
-    }
-
-    private Button createButton(String text) {
-        Button button = new Button(text);
-        button.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-        GridPane.setFillHeight(button, true);
-        GridPane.setFillWidth(button, true);
-        GridPane.setHgrow(button, Priority.ALWAYS);
-        GridPane.setVgrow(button, Priority.ALWAYS);
-        return button ;
-    }
-    
-    private Button playerButton() {
-        playerButton.setMaxSize(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-        GridPane.setFillHeight(playerButton, true);
-        GridPane.setFillWidth(playerButton, true);
-        GridPane.setHgrow(playerButton, Priority.ALWAYS);
-        GridPane.setVgrow(playerButton, Priority.ALWAYS);
-        playerButton.setOnAction(this::gamePlayers);
-        playerButton.setId("confirmbutton");
-    	return playerButton;
-    }
-    
-    public void gamePlayers(ActionEvent event) {
-    	if(!textField.getText().equals("")) {
-	    	monitor.writeJogadoresJSON(Integer.parseInt(textField.getText()));
-	    	changeMessage(String.format("Inseriu %s jogadores", textField.getText()));
-    	}
-    }
-
-
-    private GridPane createGrid() {
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(5);
-        grid.setVgap(5);
-        grid.setPadding(new Insets(10));
-        return grid;
-    }
-
-    private TextArea createDisplayField() {
-        TextArea displayField = new TextArea();
-        displayField.textProperty().bind(Bindings.format("%s", value));
-        displayField.setEditable(false);
-        displayField.setMaxHeight(5);
-        displayField.setMinWidth(586);
-        displayField.autosize();
-        return displayField;
-    }
-    
-    private TextField createPlayersField() {
-        textField.setEditable(true);
-        textField.setMaxHeight(5);
-        textField.autosize();
-        Constraints.setTextFieldInteger(textField);
-        Constraints.setTextFieldMaxLength(textField, 2);
-        return textField;
-    }
-    
-    private void changeMessage(String string) {
-        logger.setMaxHeight(5);
-        logger.setText(string);
-        logger.autosize();
-    }
+	public static Label getLogger() {
+		return logger;
+	}
 
     public static void main(String[] args) {
         launch(args);

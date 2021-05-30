@@ -1,6 +1,5 @@
 package model.entities;
 
-import java.util.Arrays;
 import java.util.Random;
 
 
@@ -8,9 +7,7 @@ import gui.util.Controller;
 import javafx.scene.control.Label;
 
 public class Jogador {
-	
 	private double aposta = 0;
-    private int[] linhas = new int[3];
     
     public void setAposta(double aposta, Label logger) {
     	Controller.changeMessage(logger, String.format("Apostou %.2f euros", aposta));
@@ -86,72 +83,6 @@ public class Jogador {
         }
     }
 
-    public String getStringCartao(int[][] cartao) {
-        return "\n" +
-                Arrays.deepToString(cartao)
-                .replace("],", "\n")
-                .replace(",", "\t| ")
-                .replaceAll("[\\[\\]]", " ")
-                .replace(" -", "X ")
-                .replace("99", "  ");
-    }
-
-    public String getStringMenu(){
-        return "\n" 
-        + "----------------------------------\n"
-        + "------- BEM VINDO AO LOTO! -------\n"
-        + "----------------------------------\n\n"
-        + "O objetivo do loto é simples, assim que o cartão é concedido ao jogador, \n"
-        + "ele terá de completar o número de linhas e colunas da matriz.\n\n"
-        + "Os números que aparecerem marcados com um 'X',\n"
-        + "são os numeros pertencentes ao cartão que o jogador já obteve. \n\n"
-        + "Regras do Jogo:\n"
-        + "  - Vence quem conseguir completar o cartão primeiro. \n"
-        + "  - Os números admitidos neste loto vão de 1 a 90 inclusive.\n"
-        + "  - No final do jogo, o jogador poderá voltar a jogar com o mesmo o cartão.\n"
-        + "  - Terá a opção de criar um novo cartão, continuar ou abandonar o jogo. \n\n"
-        + "Boa Sorte!";
-    }
-
-    public void setNrEscolhido(int nrEscolhido, int[][] cartao) {
-        try {
-            boolean nrChosen = false;
-            boolean nrExist = false;
-            int nrEscolhido1 = 0;
-            int col = 0;
-            if(nrEscolhido > 0 && nrEscolhido < 90){
-                nrEscolhido1 = nrEscolhido/10;
-            }
-            else if(nrEscolhido == 90){
-                nrEscolhido1 = 8;
-            }
-             if (nrEscolhido > 0 && nrEscolhido < 91) {
-                for (int lin=0; lin<3; lin++) {
-                   col = nrEscolhido1;
-                   if(nrEscolhido == 90){
-                       col=8;
-                       ;
-                   }                   
-                   if (nrEscolhido == cartao[lin][col]) {
-                       cartao[lin][col] = 0 - cartao[lin][col];
-                       nrExist = true;
-                   } else if(nrEscolhido == -cartao[lin][col]){
-                     nrChosen = true;
-                   }
-                }
-                if (nrChosen == true) {  
-                    System.out.println("Este número já foi escolhido!");
-                } else if (nrExist == false) {  
-                    System.out.println("Infelizmente este número não existe no cartão!");
-                }                
-            } else {
-                System.out.println("Erro, Digite um valor de 1 a 90!");
-            }
-        } catch (Exception e) {
-            System.out.println("Erro, Digite um valor válido!");
-        }
-    }
-   
     public void getClone(int[][] cartaoCopia, int[][] cartao) {
         for (int lin = 0; lin<3; lin++) {
             for (int col = 0; col < 9; col++) {
@@ -159,38 +90,5 @@ public class Jogador {
             }
         }
     } 
-    
-    public boolean isConclusaoCartao(int[][] cartao) {
-        int nrEmFalta = 0;
-        for (int lin = 0; lin<3; lin++) {
-            int nrEmFaltaNaLinha = 0;
-            for (int col = 0; col < 9; col++) {
-                if (cartao[lin][col] >= 0 && cartao[lin][col] != 99) {
-                    nrEmFalta ++;
-                    nrEmFaltaNaLinha ++;
-                }
-            }
-            if(nrEmFaltaNaLinha == 0) {                
-                if(linhas[lin] == 0) {                   
-                    System.out.println("\nA linha " + (lin + 1) + " foi concluída!\n");
-                    linhas[lin] = 1;
-                }    
-            }     
-        }
-        if(nrEmFalta == 0) {
-            return true;
-        } return false;    
-    }
      
-    public String restartGame(String resposta) {
-        if(resposta.equals("sim") || resposta.equals("Sim")|| resposta.equals("S") || resposta.equals("s")){
-            return "sim";
-        } else if(resposta.equals("Sair") || resposta.equals("sair")){
-            return "sair";}
-        else if(resposta.equals("nao") || resposta.equals("Nao")|| resposta.equals("N") || resposta.equals("n")){
-            return "nao";}
-        else {
-            return "";
-        }
-    }
 }

@@ -1,20 +1,22 @@
 package gui.util;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class Constraints {
-	public static void setTextFieldInteger(TextField txt) {
-		txt.textProperty().addListener((obs, oldValue, newValue) -> {
+	
+	public static void setTextFieldInteger(TextField textField) {
+		textField.textProperty().addListener((obs, oldValue, newValue) -> {
 			if (newValue != null && !newValue.matches("\\d*")) {
-				txt.setText(oldValue);
+				textField.setText(oldValue);
 			}
 		});
-	}
-
-	public static void setTextFieldMaxLength(TextField txt, int max) {
-		txt.textProperty().addListener((obs, oldValue, newValue) -> {
+	}	
+	
+	public static void setTextFieldMaxLength(TextField textField, int max) {
+		textField.textProperty().addListener((obs, oldValue, newValue) -> {
 			if (newValue != null && newValue.length() > max) {
-				txt.setText(oldValue);
+				textField.setText(oldValue);
 			}
 		});
 	}

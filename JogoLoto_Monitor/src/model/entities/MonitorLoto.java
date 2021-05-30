@@ -11,11 +11,11 @@ import org.json.JSONArray;
 import json.ConfigJSON;
 
 public class MonitorLoto {
-    private JSONArray nrSorteado = new JSONArray();
+    private static JSONArray nrSorteado = new JSONArray();
     private PrintWriter filePrint;
-    private FileWriter file;
+    private static FileWriter file;
     
-	public void nrEscolhido(int nrEscolhido) {
+	public static void nrEscolhido(int nrEscolhido) {
         try {
             nrSorteado.put(nrEscolhido);
             writeJSON(nrSorteado);
@@ -25,7 +25,7 @@ public class MonitorLoto {
         }
     }
     
-    private void writeJSON(JSONArray jsArray) {
+    private static void writeJSON(JSONArray jsArray) {
         try { 
             // Constructs a FileWriter given a file name, using the platform's default charset
             file = new FileWriter(ConfigJSON.getPathMonitor());
