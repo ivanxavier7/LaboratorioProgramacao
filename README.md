@@ -4,8 +4,6 @@ Ivan Xavier - 92441
 ```
 # Fase 1 - Download
 
-<img src="img/0.png">
-
 Pode usar as librarias do repositório ou descarregar novamente, precisa de instalar o SceneBuilder
 
 SceneBuilder:
@@ -16,6 +14,9 @@ JavaFX SDK:
 
 JSON JAR:
 * https://jar-download.com/artifacts/org.json
+
+<img src="img/7.png">
+<img src="img/0.png">
 
 # Fase 2 - Preferências
 
@@ -36,10 +37,13 @@ JSON JAR:
 * Adicione os argumentos de virtualização
 <img src="img/5.png">
 <img src="img/6.png">
+
 ```
 --module-path "C:\LOCALIZAÇÂO\DO\JAVAFX\SDK" --add-modules javafx.controls,javafx.fxml
 ```
+
 * Exemplo:
+
 ```
 --module-path "C:\javafx-sdk-16\lib" --add-modules javafx.controls,javafx.fxml
 ```
