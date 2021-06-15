@@ -1,4 +1,3 @@
-# Grupo
 ```
 Ivan Xavier - 92441
 ```
