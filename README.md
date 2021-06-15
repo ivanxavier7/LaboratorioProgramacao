@@ -1,8 +1,49 @@
 # Grupo
 ```
 Ivan Xavier - 92441
-Simão Silva - 102914
 ```
+# Fase 1 - Download
+
+<img src="img/0.png">
+
+Pode usar as librarias do repositório ou descarregar novamente, precisa de instalar o SceneBuilder
+
+SceneBuilder:
+* https://gluonhq.com/products/scene-builder/
+
+JavaFX SDK:
+* https://gluonhq.com/products/javafx/
+
+JSON JAR:
+* https://jar-download.com/artifacts/org.json
+
+# Fase 2 - Preferências
+
+* Localize o executável do SceneBuilder instalado na sua máquina
+* Localize o javaFX SDK descarregado
+* Introduza a localização de ambos nas preferências
+<img src="img/1.png">
+<img src="img/2.png">
+
+# Fase 3 - Librarias
+
+* No Build Path adicione as librarias do JavaFX e do JSON
+<img src="img/3.png">
+<img src="img/4.png">
+
+# Fase 4 - Virtualização
+
+* Adicione os argumentos de virtualização
+<img src="img/5.png">
+<img src="img/6.png">
+```
+--module-path "C:\LOCALIZAÇÂO\DO\JAVAFX\SDK" --add-modules javafx.controls,javafx.fxml
+```
+* Exemplo:
+```
+--module-path "C:\javafx-sdk-16\lib" --add-modules javafx.controls,javafx.fxml
+```
+
 # Monitor
 <img src="img/monitor.png">
 
